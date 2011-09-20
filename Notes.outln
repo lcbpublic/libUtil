@@ -1,0 +1,62 @@
+-*- mode: outline; -*-
+
+* Overall Operation
+** Main Program
+Creates Trader passing it 'argc' and 'argv'.
+
+** Trader
+Creates one or more Strategies to trade one or more Markets via one or
+more Accounts.
+
+** Strategy
+Decides when to place orders by examining past data from one or more
+Markets.  Each Strategy has exactly one account and or more markets.
+
+** Account
+Maintains running account balance and other stats about actual trades
+executed.  Also serves as the interface between a Strategy and one or
+more Markets.
+
+? This class can serve as base class for cases where the Trader and/or
+Strategy need additional/different stats. ?
+
+** Market
+Fetches market data sequentially from a (single) market database and
+executes pending Orders against it.  Executed Orders are applied to
+their corresponding Accounts.  Bar and open data are passed to
+... who?  Strategy?  Trader?
+
+
+* Simulated Trading Classes
+Sadly, it probably makes sense to have both Daily and Intraday
+versions of all classes except BerkeleyDb.  The problem is that the
+duration of a daily bar is not constant (i.e. full days vs. half days,
+etc.) while intraday bars _are_ always the same length.  Therefore
+each daily bar is only associated with a date and has a variable
+duration, while an intraday bar is associated with a date-time and has
+a fixed duration.  This makes handling "time" for daily bars
+significantly different from intraday bars.
+
+** BerkeleyDb
+A simpler wrapper around the Berkely DB C++ classes.  This one already
+exists (see BerkelyDb.{hpp,cpp}).
+
+** DailyData, IntradayData
+Extend BerkelyDb to access daily/intraday data.  Data items/records
+represent individual bars. These exist (see DailyData and
+IntradayData).
+
+** DailyMarket, IntradayMarket
+Uses market data to simulate trades.  Maintains lists/queues of open
+orders and executes them against the market data.  Includes "tick"
+size and market related trading "costs" (non-ideal order execution,
+etc.).  Allows placing and canceling of orders.  Executed/cancelled
+orders are returned to the corresponding Account.  Market data is
+passed to ... where?
+
+
+** BaseAccount?
+
+** BaseDailyTrader, BaseIntradayTrader
+Base class for epresenting trading algorithms.  Interacts with one (or
+more?) Markets.

@@ -1,0 +1,10 @@
+#ifndef Config_hpp
+#define Config_hpp
+/******************************************************************************
+ * Various build configuration variables.
+ *****************************************************************************/
+// Library version.
+#define VersionMajor @LibUtilxx_VERSION_MAJOR@
+#define VersionMinor @LibUtilxx_VERSION_MINOR@
+#define VersionPatch @LibUtilxx_VERSION_PATCH@
+#endif
