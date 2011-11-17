@@ -1,19 +1,20 @@
 #include <errno.h>
 #include <limits.h>
+#include <stdint.h>
 
 #include "Util.h"
 
 /******************************************************************************
  * Functions equivalent to strtol(), etc., for other basic types.
  *****************************************************************************/
-short strtos(const char *Str, char **End, int Base)
-{ /* strtos(char *, char **, int) */
-#if SHRT_MAX == LONG_MAX
-  /* In the event that 'short' and 'long' are the same size just call
-   * strtol() and cast the result. */
-  return (short) strtoul(Str, End, Base);
+int32_t strtoi32(const char *Str, char **End, int Base)
+{ /* strtoi32(const char *, char **, int) */
+#if INT32_MAX == LONG_MAX
+  /* In the event that 'int32_t' and 'long' are the same size just
+   * call strtol() and cast the result. */
+  return (int32_t) strtol(Str, End, Base);
 
-#elif SHRT_MAX < LONG_MAX
+#elif INT32_MAX < LONG_MAX
   int SavedErrNo;
   long Val;
 
@@ -24,21 +25,21 @@ short strtos(const char *Str, char **End, int Base)
    */
   SavedErrNo = errno;
 
-  /* Convert to unsigned long. */
+  /* Convert to long. */
   errno = 0;
   Val = strtol(Str, End, Base);
 
   /* Check for errors. */
-  if (Val > SHRT_MAX)
+  if (Val > INT32_MAX)
   { /* Overflow. */
-    Val = SHRT_MAX;
+    Val = INT32_MAX;
     if (errno == 0)
       errno = ERANGE;
   } /* Overflow. */
 
-  else if (Val < SHRT_MIN)
+  else if (Val < INT32_MIN)
   { /* Underflow. */
-    Val = SHRT_MIN;
+    Val = INT32_MIN;
     if (errno == 0)
       errno = ERANGE;
   } /* Underflow. */
@@ -46,8 +47,8 @@ short strtos(const char *Str, char **End, int Base)
   /* Return result. */
   if (errno == 0)
     errno = SavedErrNo;
-  return (short) Val;
+  return (int32_t) Val;
 #else
-#error "Can not implement strtos()."
+#error "Can not implement strtoi32()."
 #endif
-} /* strtos(char *, char **, int) */
+} /* strtoi32(const char *, char **, int) */

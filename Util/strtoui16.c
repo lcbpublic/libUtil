@@ -1,21 +1,20 @@
 #include <errno.h>
 #include <limits.h>
+#include <stdint.h>
 
 #include "Util.h"
 
 /******************************************************************************
  * Functions equivalent to strtol(), etc., for other basic types.
  *****************************************************************************/
-unsigned short strtous(const char *Str, char **End, int Base)
-{ /* strtous(char *, char **, int) */
-#if USHRT_MAX == ULONG_MAX
-  /* In the event that 'unsigned short' and 'unsigned long' are the
-   * same size just call strtoul() and cast the result. */
-  return (unsigned short) strtoul(Str, End, Base);
+uint16_t strtoui16(const char *Str, char **End, int Base)
+{ /* strtoui16(const char *, char **, int) */
+#if UINT16_MAX == ULONG_MAX
+  /* In the event that 'uint16_t' and 'unsigned long' are the same
+   * size just call strtoul() and cast the result. */
+  return (uint16_t) strtoul(Str, End, Base);
 
-#elif USHRT_MAX < LONG_MAX
-  /* If a 'long' can represent an 'unsigned short' then call strtol()
-   * and check the result.  See comments below for more details. */
+#elif UINT16_MAX < LONG_MAX
   int SavedErrNo;
   long Val;
 
@@ -28,19 +27,19 @@ unsigned short strtous(const char *Str, char **End, int Base)
 
   /* Convert to long.  strtoul() silently converts negatives to
    * positives so '-1' is indistinguishable from 0xffffffffffffffff.
-   * To correctly mirror strtoul() for unsigned short we must return
+   * To correctly mirror strtoul() for uint16_t we must return
    * ERANGE for anything greater than 0xffff or less than -0xffff.
    * We do this by calling strtol() (signed long), checking the
-   * (signed) range of the result, and finally casting to unsigned
-   * short.  This is admittedly nasty but I don't see any other good
-   * way of doing it. */
+   * (signed) range of the result, and finally casting to uint16_t.
+   * This is admittedly nasty but I don't see any other good way of
+   * doing it. */
   errno = 0;
   Val = strtol(Str, End, Base);
 
   /* Check for errors. */
-  if (Val > (long) USHRT_MAX || Val < -((long) USHRT_MAX))
+  if (Val > (long) UINT16_MAX || Val < -((long) UINT16_MAX))
   { /* Overflow. */
-    Val = USHRT_MAX;
+    Val = UINT16_MAX;
     if (errno == 0)
       errno = ERANGE;
   } /* Overflow. */
@@ -48,8 +47,8 @@ unsigned short strtous(const char *Str, char **End, int Base)
   /* Return result. */
   if (errno == 0)
     errno = SavedErrNo;
-  return (unsigned short) Val;
+  return (uint16_t) Val;
 #else
-#error "Can not implement strtous()."
+#error "Can not implement strtoui16()."
 #endif
-} /* strtous(char *, char **, int) */
+} /* strtoui16(const char *, char **, int) */

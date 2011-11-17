@@ -8,18 +8,14 @@
  *****************************************************************************/
 int strtoi(const char *Str, char **End, int Base)
 { /* strtoi(char *, char **, int) */
-  const char *Src;
-  char *EndPtr;
+#if INT_MAX == LONG_MAX
+  /* In the event that 'int' and 'long' are the same size just call
+   * strtol() and cast the result. */
+  return (int) strtoul(Str, End, Base);
+
+#elif INTT_MAX < LONG_MAX
   int SavedErrNo;
   long Val;
-
-  /* Error checking. */
-  if (Str == NULL || Base == 1 || Base > 36)
-  { /* Error. */
-    errno = EINVAL;
-    return 0;
-  } /* Error. */
-  Src = Str;
 
   /* 
    * If we are successful we must not modify errno.  However,
@@ -30,35 +26,28 @@ int strtoi(const char *Str, char **End, int Base)
 
   /* Convert to unsigned long. */
   errno = 0;
-  Val = strtol(Src, &EndPtr, Base);
-  Src = EndPtr;
-  if (errno != 0)
-  { /* Error. */
-    if (Val > INT_MAX)
-      Val = INT_MAX;
-    else if (Val < INT_MIN)
-      Val = INT_MIN;
-    return (int) Val;
-  } /* Error. */
+  Val = strtol(Str, End, Base);
 
-  /* Check range. */
+  /* Check for errors. */
   if (Val > INT_MAX)
-  { /* Range error. */
+  { /* Overflow. */
     Val = INT_MAX;
-    errno = ERANGE;
-    return (int) Val;
-  } /* Range error. */
+    if (errno == 0)
+      errno = ERANGE;
+  } /* Overflow. */
 
-  if (Val < INT_MIN)
-  { /* Range error. */
+  else if (Val < INT_MIN)
+  { /* Underflow. */
     Val = INT_MIN;
-    errno = ERANGE;
-    return (int) Val;
-  } /* Range error. */
+    if (errno == 0)
+      errno = ERANGE;
+  } /* Underflow. */
 
-  /* Return result(s). */
-  errno = SavedErrNo;
-  if (End != NULL)
-    *End = (char *) Src;
+  /* Return result. */
+  if (errno == 0)
+    errno = SavedErrNo;
   return (int) Val;
+#else
+#error "Can not implement strtoui()."
+#endif
 } /* strtoi(char *, char **, int) */

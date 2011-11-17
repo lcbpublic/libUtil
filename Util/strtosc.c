@@ -11,18 +11,13 @@ signed char strtosc(const char *Str, char **End)
   const char *Src;
   signed char Char;
 
-  if (Str == NULL)
-  { /* Error. */
-    errno = EINVAL;
-    return 0;
-  } /* Error. */
   Src = Str;
-
   switch (*Src)
   { /* Select character. */
     case '\0':
     { /* Error. */
-      errno = EINVAL;
+      if (End != NULL)
+        *End = (char *) Str;
       return 0;
     } /* Error. */
     break;
@@ -73,53 +68,63 @@ signed char strtosc(const char *Str, char **End)
           break;
 
         case 'x':
-        { /*  Hexidecimal character code. */
-          char *EndPtr;
-          int SavedErrNo;
-          unsigned long HexVal;
-
-          /* 
-           * If we are successful we must not modify errno.  However,
-           * to reliably detect errors in strtoul() we must set errno
-           * to zero.  So, ...
-           */
-          SavedErrNo = errno;
-
-          /* Make sure we start with a hex digit. */
+        { /* '\x' */
+          /* Make sure we start with a hex digit. If not, then what we
+           * have a problem.  In GCC a sting like "\x stuff" generates
+           * an error because "\x" _must_ be followed by at least one
+           * hex digit so the conversion must "fail".  There are
+           * several ways we might indicate failure but we elect to do
+           * the following.  We return zero and set '*End' to 'Str'.
+           * This seems equivalent to, say, strtol() which, if no
+           * digits are found, returns zero and sets '*endptr' to
+           * 'nptr'.  We also elect _not_ to set 'errno' to EINVAL
+           * since, on Linux at least, EINVAL seems to be reserved for
+           * an invalid base in integer conversions.  */
           ++Src;
           if (!isxdigit(*Src))
-          { // Error.
-            errno = EINVAL;
-            return (signed char) 0;
-          } // Error.
-
-          /*
-           * Convert to unsigned long.  Note that the hex escape
-           * code syntax (\x<hdigit>[<hdigit>]) does not allow for
-           * negative values.  So, we must convert to unsigned then
-           * cast to char when we're done.
-           */
-          errno = 0;
-          HexVal = strtoul(Src, &EndPtr, 16);
-          Src = EndPtr;
-          if (errno != 0)
-          { /* Error. */
-            if (HexVal > UCHAR_MAX)
-              HexVal = SCHAR_MAX;
-          } /* Error. */
-
-          /* Check range. */
-          else if (HexVal > UCHAR_MAX)
-          { /* Range error. */
-            HexVal = SCHAR_MAX;
-            errno = ERANGE;
-          } /* Range error. */
-
+          { /* Not hex digit. */
+            Char = 0;
+            Src = Str;
+          } /* Not hex digit. */
           else
-            errno = SavedErrNo;
+          { /*  Hexidecimal character code. */
+            char *EndPtr;
+            int SavedErrNo;
+            unsigned long HexVal;
 
-          Char = (signed char) HexVal;
-        } /* Hexidecimal character code. */
+            /* 
+             * If we are successful we must not modify errno.  However,
+             * to reliably detect errors in strtoul() we must set errno
+             * to zero.  So, ...
+             */
+            SavedErrNo = errno;
+
+            /*
+             * Convert to unsigned long.  Note: The hex escape code
+             * syntax (\x<hdigit>[<hdigit>]) does not allow for
+             * negative values so we convert to unsigned long then
+             * cast to char when we're done.
+             */
+            errno = 0;
+            HexVal = strtoul(Src, &EndPtr, 16);
+            Src = EndPtr;
+
+            /* Check for errors. */
+            if (HexVal > UCHAR_MAX)
+            { /* Out of range. */
+              HexVal = SCHAR_MAX;
+              if (errno == 0)
+                errno = ERANGE;
+            } /* Out of range. */
+
+            if (errno == 0)
+            { /* No errors. */
+              errno = SavedErrNo;
+            } /* No errors. */
+
+            Char = (signed char) HexVal;
+          } /* Hexidecimal character code. */
+        } /* '\x' */
         break;
 
         case '0': case '1': case '2': case '3':
@@ -129,6 +134,9 @@ signed char strtosc(const char *Str, char **End)
           int SavedErrNo;
           unsigned long OctVal;
 
+          /* No need to check for an octal character since our 'case'
+           * statements guarantee we have one. */
+
           /*
            * If we are successful we must not modify errno.  However,
            * to reliably detect errors in strtoul() we must set errno
@@ -137,8 +145,8 @@ signed char strtosc(const char *Str, char **End)
           SavedErrNo = errno;
 
           /*
-           * Convert to unsigned long.  Note that the hex escape
-           * code syntax (\x<hdigit>[<hdigit>]) does not allow for
+           * Convert to unsigned long.  Note that the octal escape
+           * code syntax (\<odigit>[<odigit>]) does not allow for
            * negative values.  So, we must convert to unsigned then
            * cast to char when we're done.
            */
@@ -146,21 +154,18 @@ signed char strtosc(const char *Str, char **End)
           OctVal = strtoul(Src, &EndPtr, 8);
           Src = EndPtr;
 
-          if (errno != 0)
-          { /* Error. */
-            if (OctVal > UCHAR_MAX)
-              OctVal = SCHAR_MAX;
-          } /* Error. */
-
-          /* Check range. */
-          else if (OctVal > UCHAR_MAX)
-          { /* Range error. */
+          /* Check for errors. */
+          if (OctVal > UCHAR_MAX)
+          { /* Out of range. */
             OctVal = SCHAR_MAX;
-            errno = ERANGE;
-          } /* Range error. */
+            if (errno == 0)
+              errno = ERANGE;
+          } /* Out of range. */
 
-          else
+          if (errno == 0)
+          { /* No errors. */
             errno = SavedErrNo;
+          } /* No errors. */
 
           Char = (signed char) OctVal;
         } /* Octal character code. */
