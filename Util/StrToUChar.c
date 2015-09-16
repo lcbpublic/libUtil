@@ -5,11 +5,12 @@
 
 /******************************************************************************
  * Equivalent to strtouc() but with simplified error reporting.
- * Returns the errno value rather than setting the global errno.  The
- * global errno is always left unchanged.  It is an error not to use
- * all of 'Str'.  Returns ERANGE on overflow/underflow and EINVAL for
- * a malformed 'Str'.  If the function returns non-zero then '*Val' is
- * unchanged.  In all cases neither 'Str' nor 'Val' may be NULL.
+ * Returns the 'errno' value rather than setting the global 'errno'.
+ * The global 'errno' is always left unchanged.  It is an error not to
+ * use all of 'Str', or for (*Str == '\0').  Returns ERANGE on
+ * overflow/underflow and EINVAL for a malformed 'Str'.  If the
+ * function returns non-zero then '*Val' is unchanged.  In all cases
+ * neither 'Str' nor 'Val' may be NULL.
  *****************************************************************************/
 int StrToUChar(const char *Str, unsigned char *Val)
 { /* StrToUChar(char *, char *) */
@@ -23,17 +24,20 @@ int StrToUChar(const char *Str, unsigned char *Val)
     return EFAULT;
   } /* Error. */
 
+  /* Check that 'Str' is not empty. */
+  if (*Str == '\0')
+  { /* Error. */
+    return EINVAL;
+  } /* Error. */
+
   /* strtoc() returns error status in 'errno' but we must leave it
    * unchanged. */
   SavedErrNo = errno;
-  errno = 0;
 
   /* Do the conversion. */
+  errno = 0;
   NewVal = strtouc(Str, &End);
-
-  /* Save errno and restore original value. */
   ErrNo = errno;
-  errno = SavedErrNo;
 
   /* Check for errors. */
   if (End == Str || *End != '\0')
@@ -41,10 +45,12 @@ int StrToUChar(const char *Str, unsigned char *Val)
     ErrNo = EINVAL;
   } /* Error. */
 
-  /* Return results. */
-  if (ErrNo == 0)
-  { /* No error. */
+  else if (ErrNo == 0)
+  { /* No error, so return converted value. */
     *Val = NewVal;
-  } /* No error. */
+  } /* No error, so return converted value. */
+
+  /* Restore global 'errno' and return 'ErrNo'. */
+  errno = SavedErrNo;
   return ErrNo;
-} /* StrToChar(char *, unsigned char *) */
+} /* StrToUChar(char *, unsigned char *) */

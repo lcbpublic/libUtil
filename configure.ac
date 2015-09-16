@@ -127,6 +127,10 @@ Util_LIBS=-lUtil
 AC_SUBST([Util_LIBS])
 
 # Checks for header files.
+AC_CHECK_HEADERS([ctype.h])
+AC_CHECK_HEADERS([errno.h])
+AC_CHECK_HEADERS([limits.h])
+AC_CHECK_HEADERS([stdint.h])
 AC_CHECK_HEADERS([sys/stdlib.h])
 
 # Checks for typedefs, structures, and compiler characteristics.

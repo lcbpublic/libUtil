@@ -1,2 +1,0 @@
-/home/lbest/Development/LibUtil/Util/CMakeFiles/Util.dir
-/home/lbest/Development/LibUtil/CMakeFiles/uninstall.dir

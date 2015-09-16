@@ -1,10 +1,11 @@
 #include <errno.h>
 #include <limits.h>
+#include <ctype.h>
 
 #include "Util.h"
 
 /******************************************************************************
- * Functions equivalent to strtol(), etc., for other basic types.
+ * Function equivalent to strtol(), etc., for 'char'.
  *****************************************************************************/
 char strtoc(const char *Str, char **End)
 { /* strtoc(char *, char **) */
@@ -15,11 +16,9 @@ char strtoc(const char *Str, char **End)
   switch (*Src)
   { /* Select character. */
     case '\0':
-    { /* Error. */
-      if (End != NULL)
-        *End = (char *) Str;
-      return 0;
-    } /* Error. */
+    { /* Empty string. */
+      Char = 0;
+    } /* Empty string. */
     break;
 
     case '\\':
@@ -69,17 +68,17 @@ char strtoc(const char *Str, char **End)
 
         case 'x':
         { /* '\x' */
-          /* Make sure we start with a hex digit. If not, then what we
-           * have a problem.  In GCC a sting like "\x stuff" generates
-           * an error because "\x" _must_ be followed by at least one
-           * hex digit so the conversion must "fail".  There are
-           * several ways we might indicate failure but we elect to do
-           * the following.  We return zero and set '*End' to 'Str'.
-           * This seems equivalent to, say, strtol() which, if no
-           * digits are found, returns zero and sets '*endptr' to
-           * 'nptr'.  We also elect _not_ to set 'errno' to EINVAL
-           * since, on Linux at least, EINVAL seems to be reserved for
-           * an invalid base in integer conversions.  */
+          /* Make sure we start with a hex digit. If not, then we have
+           * a problem.  In GCC a sting like "\x stuff" generates an
+           * error because "\x" _must_ be followed by at least one hex
+           * digit so the conversion must "fail".  There are several
+           * ways we might indicate failure but we elect to do the
+           * following.  We return zero and set '*End' to 'Str'.  This
+           * seems equivalent to, say, strtol() which, if no digits
+           * are found, returns zero and sets '*endptr' to 'nptr'.  We
+           * also elect _not_ to set 'errno' to EINVAL since, on Linux
+           * at least, EINVAL seems to be reserved for an invalid base
+           * in integer conversions.  */
           ++Src;
           if (!isxdigit(*Src))
           { /* Not hex digit. */
@@ -117,7 +116,7 @@ char strtoc(const char *Str, char **End)
                 errno = ERANGE;
             } /* Out of range. */
 
-            if (errno == 0)
+            else if (errno == 0)
             { /* No errors. */
               errno = SavedErrNo;
             } /* No errors. */
@@ -162,7 +161,7 @@ char strtoc(const char *Str, char **End)
               errno = ERANGE;
           } /* Out of range. */
 
-          if (errno == 0)
+          else if (errno == 0)
           { /* No errors. */
             errno = SavedErrNo;
           } /* No errors. */

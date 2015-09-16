@@ -5,38 +5,38 @@
 #include "Util.h"
 
 /******************************************************************************
- * Functions equivalent to strtol(), etc., for other basic types.
+ * Function equivalent to strtoul() but for 'uint16_t'.  See strtous.c
+ * for the logic behind this code.
  *****************************************************************************/
 uint16_t strtoui16(const char *Str, char **End, int Base)
 { /* strtoui16(const char *, char **, int) */
+  /* We really have no idea what basic C type uint16_t might be so we
+   * need to check against both 'unsigned long' and 'unsigned long
+   * long'. */
+  
 #if UINT16_MAX == ULONG_MAX
-  /* In the event that 'uint16_t' and 'unsigned long' are the same
-   * size just call strtoul() and cast the result. */
+  /* In the event that 'uint16_t' and 'unsigned long' are the
+   * same size just call strtoul() and cast the result. */
   return (uint16_t) strtoul(Str, End, Base);
+
+#elif UINT16_MAX == ULLONG_MAX
+  /* In the event that 'uint16_t' and 'unsigned long long' are the
+   * same size just call strtoull() and cast the result. */
+  return (uint16_t) strtoull(Str, End, Base);
 
 #elif UINT16_MAX < LONG_MAX
   int SavedErrNo;
   long Val;
 
-  /* 
-   * If we are successful we must not modify errno.  However,
-   * to reliably detect errors in strtoul() we must set errno
-   * to zero.  So, ...
-   */
+  /* Save initial value of 'errno' */
   SavedErrNo = errno;
 
-  /* Convert to long.  strtoul() silently converts negatives to
-   * positives so '-1' is indistinguishable from 0xffffffffffffffff.
-   * To correctly mirror strtoul() for uint16_t we must return
-   * ERANGE for anything greater than 0xffff or less than -0xffff.
-   * We do this by calling strtol() (signed long), checking the
-   * (signed) range of the result, and finally casting to uint16_t.
-   * This is admittedly nasty but I don't see any other good way of
-   * doing it. */
+  /* Convert to 'long'. */
   errno = 0;
   Val = strtol(Str, End, Base);
 
-  /* Check for errors. */
+  /* Clamp the converted value to the range of an 'uint16_t'.  If
+   * 'errno' is not already set, set it to 'ERANGE' */
   if (Val > (long) UINT16_MAX || Val < -((long) UINT16_MAX))
   { /* Overflow. */
     Val = UINT16_MAX;
@@ -44,9 +44,12 @@ uint16_t strtoui16(const char *Str, char **End, int Base)
       errno = ERANGE;
   } /* Overflow. */
 
-  /* Return result. */
-  if (errno == 0)
+  else if (errno == 0)
+  { /* No other error so restore saved 'errno'. */
     errno = SavedErrNo;
+  } /* No other error so restore saved 'errno'. */
+
+  /* Return the result. */
   return (uint16_t) Val;
 #else
 #error "Can not implement strtoui16()."

@@ -9,57 +9,23 @@ extern "C" {
 #endif
 
 /******************************************************************************
- * Functions equivalent to strtol(), etc., for other basic types.  In
- * all cases 'Str' _must_ not be NULL.
+ * Functions for converting strings to various numeric types.  The
+ * strtoX() functions are equivalent to strtol(), etc., for other
+ * basic types.  The StrToX() functions do the conversions wqith
+ * greatly simplified error semantics.
+ *****************************************************************************/
+/******************************************************************************
+ * Functions equivalent to strtol(), etc., for other basic types.
  *
  * WARNING: All the strtox() functions except strtoc(), strtosc() and
- * strtouc() are in turn based on strtol(), strtoul(), strtoll(), or
- * strtoull().  As such they share the underlying function's error
- * semantics which are, sadly, poorly defined.  Considering both the
- * Linux man pages, the Open Group's "The Single Unix Specification",
- * and http://www.austingroupbugs.net/view.php?id=453 it appears we
- * can only count on the following:
- *
- *   1) On success 'errno' is unchanged and (endptr != nptr).
- *
- *   2) If the value is out of range for the return type (errno ==
- *      ERANGE) and (endptr != nptr).
- *
- *   3) If 'base' is valid but no conversion is performed (endptr ==
- *      nptr).  Also, 'errno' _may_ be EINVAL.
- *
- *   4) If 'base' is invalid [sigh] behavior is basically undefined.
- *      However, according to empirical testing (see
- *      http://www.austingroupbugs.net/view.php?id=453) (errno ==
- *      EINVAL) and 'endptr' is undefined.
- *
- * So, if 'errno' is set to zero before the call then the following
- * should work:
- *
- *   val = strtol(Str, &End, Base);
- *
- *   // Errno is always ERANGE for range errors.
- *   if (errno == ERANGE)
- *     <Range error>
- *
- *   // We should never get any other value for errno besides EINVAL.
- *   else if (errno != 0 && errno != EINVAL)
- *     <Unexpected error>
- *
- *   // Errno may or may not be EINVAL for an invalid base so check explicitly.
- *   else if (Base != 0 && (Base < 2 || Base > 36))
- *     <Invalid base>
- *
- *   // Errno may or may not be EINVAL for an invalid Str so check explicitly
- *   // but End is always set to Str.
- *   else if (End == Str)
- *     <Str invalid>
- *
- *   // We successfully parsed a number.
- *   else
- *     <Success>
- *
- * What a mess!
+ * strtouc() (which we wrote from scratch) are in turn based on
+ * strtol(), strtoul(), strtoll(), strtoull(), strtof(), strtod(), or
+ * strtold().  These underlying functions have error semantics which
+ * are at best awkward, and at worst undefined.  Read both the Linux
+ * man pages, and the Open Group's "The Single Unix Specification" /
+ * POSIX.1-2008 spec carefully(!) as the corresponding functions
+ * declared here (strtos(), etc.) have exactly analogous error
+ * semantics.
  *****************************************************************************/
   /* These interpret C escape sequences in Str. */
   extern char strtoc(const char *Str, char **End);
@@ -103,17 +69,48 @@ extern "C" {
   extern uint_fast64_t strtouif64(const char *Str, char **End, int Base);
 
 /******************************************************************************
- * Functions equivalent to strtol(), etc. above but with simplified
- * error reporting.  These functions return the errno value rather
- * than setting the global errno.  The global errno is always left
- * unchanged.  It is an error not to use all of 'Str' and leading
- * white-space is not allowed.  On overflow/underflow they return
- * ERANGE.  For a malformed 'Str' they return EINVAL.  For an invalid
- * 'Base' (where applicable) they return EDOM.  If either 'Str' or
- * 'Val' are NULL they return EFAULT.  Other values may be returned by
- * the underlying 'strtox()' functions although none are currently
- * documented.  If any of these functions returns non-zero then '*Val'
- * is unchanged.
+ * The StrToX() functions we provide below have much simpler error
+ * semantics.  They are simply:
+ *
+ * 1) On success, the functions return 0 and the converted value is
+ *    returned in '*Val'.
+ *
+ * 2) On error an 'errno' value is returned and '*Val' is unchanged.
+ *
+ *   2.1) If ('Str' == NULL || Val == NULL) then EFAULT is returned.
+ *
+ *   2.2) All of 'Str' must be used during the conversion (except the
+ *        terminarting '\0').  If not, or if (*Str == '\0'), then
+ *        EINVAL is returned.
+ *
+ *   2.3) If the value represented by 'Str' is out of range for the
+ *        required type (including passing negative numbers to
+ *        StrToUX()), then ERANGE is returned.
+ *
+ *   2.4) For functions that take a 'Base' argument, if (Base != 0 &&
+ *        (Base < 2 || Base > 36)), then EDOM is returned.
+ *
+ *   2.5) Should the underlying strtox() function set 'errno' to any
+ *        value other than 0, EINVAL, or ERANGE, that value is
+ *        returned and '*Val' is unchanged.
+ *
+ * 3) On return, the global 'errno' is unchanged (although it may be
+ *    temporarily modified internally to the functiuon).
+ *
+ * So, the caller simply needs to do (for exmple):
+ *
+ *   char *Str;
+ *   short Val;
+ *   int ErrNo;
+ *
+ *   // Get 'Str' from somewhere.
+ *
+ *   if ((ErrNo = StrToShort(Str, 0, &Val)) != 0)
+ *   { // Handle error.
+ *     ...
+ *   } // Handle error.
+ *
+ *   // Use Val.
  *****************************************************************************/
   /* These interpret C escape sequences in Str. */
   extern int StrToChar(const char *Str, char *Val);
@@ -134,7 +131,6 @@ extern "C" {
   extern int StrToDouble(const char *Str, double *Val);
   extern int StrToLongDouble(const char *Str, long double *Val);
 
-#if 0
   /* Conversions for types defined in stdint.h.  WARNING: These should
    * work on platforms where a 'long' is at least 32 bits and a 'long
    * long' is at least 64 bits.  All bets are off for other cases */
@@ -164,7 +160,6 @@ extern "C" {
   extern int StrToUFInt32(const char *Str, int Base, uint_fast32_t *Val);
   extern int StrToFInt64(const char *Str, int Base, int_fast64_t *Val);
   extern int StrToUFInt64(const char *Str, int Base, uint_fast64_t *Val);
-#endif
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

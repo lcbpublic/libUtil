@@ -5,38 +5,38 @@
 #include "Util.h"
 
 /******************************************************************************
- * Functions equivalent to strtol(), etc., for other basic types.
+ * Function equivalent to strtoul() but for 'uint32_t'.  See strtous.c
+ * for the logic behind this code.
  *****************************************************************************/
 uint32_t strtoui32(const char *Str, char **End, int Base)
 { /* strtoui32(const char *, char **, int) */
+  /* We really have no idea what basic C type uint32_t might be so we
+   * need to check against both 'unsigned long' and 'unsigned long
+   * long'. */
+  
 #if UINT32_MAX == ULONG_MAX
-  /* In the event that 'uint32_t' and 'unsigned long' are the same
-   * size just call strtoul() and cast the result. */
+  /* In the event that 'uint32_t' and 'unsigned long' are the
+   * same size just call strtoul() and cast the result. */
   return (uint32_t) strtoul(Str, End, Base);
+
+#elif UINT32_MAX == ULLONG_MAX
+  /* In the event that 'uint32_t' and 'unsigned long long' are the
+   * same size just call strtoull() and cast the result. */
+  return (uint32_t) strtoull(Str, End, Base);
 
 #elif UINT32_MAX < LONG_MAX
   int SavedErrNo;
   long Val;
 
-  /* 
-   * If we are successful we must not modify errno.  However,
-   * to reliably detect errors in strtoul() we must set errno
-   * to zero.  So, ...
-   */
+  /* Save initial value of 'errno' */
   SavedErrNo = errno;
 
-  /* Convert to long.  strtoul() silently converts negatives to
-   * positives so '-1' is indistinguishable from 0xffffffffffffffff.
-   * To correctly mirror strtoul() for uint32_t we must return ERANGE
-   * for anything greater than 0xffffffff or less than -0xffffffff.
-   * We do this by calling strtol() (signed long), checking the
-   * (signed) range of the result, and finally casting to uint32_t.
-   * This is admittedly nasty but I don't see any other good way of
-   * doing it. */
+  /* Convert to 'long'. */
   errno = 0;
   Val = strtol(Str, End, Base);
 
-  /* Check for errors. */
+  /* Clamp the converted value to the range of an 'uint32_t'.  If
+   * 'errno' is not already set, set it to 'ERANGE' */
   if (Val > (long) UINT32_MAX || Val < -((long) UINT32_MAX))
   { /* Overflow. */
     Val = UINT32_MAX;
@@ -44,9 +44,12 @@ uint32_t strtoui32(const char *Str, char **End, int Base)
       errno = ERANGE;
   } /* Overflow. */
 
-  /* Return result. */
-  if (errno == 0)
+  else if (errno == 0)
+  { /* No other error so restore saved 'errno'. */
     errno = SavedErrNo;
+  } /* No other error so restore saved 'errno'. */
+
+  /* Return the result. */
   return (uint32_t) Val;
 #else
 #error "Can not implement strtoui32()."

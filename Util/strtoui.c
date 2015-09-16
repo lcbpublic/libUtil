@@ -4,10 +4,11 @@
 #include "Util.h"
 
 /******************************************************************************
- * Functions equivalent to strtol(), etc., for other basic types.
+ * Function equivalent to strtol() but for 'unsigned int'.  See
+ * strtous.c for the logic behind this code.o
  *****************************************************************************/
 unsigned int strtoui(const char *Str, char **End, int Base)
-{ /* strtoui(char *, char **, int) */
+{ /* strtoui(const char *, char **, int) */
 #if UINT_MAX == ULONG_MAX
   /* In the event that 'unsigned int' and 'unsigned long' are the same
    * size just call strtoul() and cast the result. */
@@ -17,25 +18,15 @@ unsigned int strtoui(const char *Str, char **End, int Base)
   int SavedErrNo;
   long Val;
 
-  /* 
-   * If we are successful we must not modify errno.  However,
-   * to reliably detect errors in strtoul() we must set errno
-   * to zero.  So, ...
-   */
+  /* Save initial value of 'errno' */
   SavedErrNo = errno;
 
-  /* Convert to long.  strtoul() silently converts negatives to
-   * positives so '-1' is indistinguishable from 0xffffffffffffffff.
-   * To correctly mirror strtoul() for unsigned int we must return
-   * ERANGE for anything greater than 0xffffffff or less than
-   * -0xffffffff.  We do this by calling strtol() (signed long),
-   * checking the (signed) range of the result, and finally casting
-   * to unsigned int.  This is admittedly nasty but I don't see any
-   * other good way of doing it. */
+  /* Convert to 'long'. */
   errno = 0;
   Val = strtol(Str, End, Base);
 
-  /* Check for errors. */
+  /* Clamp the converted value to the range of an 'unsigned int'.  If
+   * 'errno' is not already set, set it to 'ERANGE' */
   if (Val > (long) UINT_MAX || Val < -((long) UINT_MAX))
   { /* Overflow. */
     Val = UINT_MAX;
@@ -43,11 +34,14 @@ unsigned int strtoui(const char *Str, char **End, int Base)
       errno = ERANGE;
   } /* Overflow. */
 
-  /* Return result. */
-  if (errno == 0)
+  else if (errno == 0)
+  { /* No other error so restore saved 'errno'. */
     errno = SavedErrNo;
+  } /* No other error so restore saved 'errno'. */
+  
+  /* Return the result. */
   return (unsigned int) Val;
 #else
 #error "Can not implement strtoui()."
 #endif
-} /* strtoui(char *, char **, int) */
+} /* strtoui(const char *, char **, int) */

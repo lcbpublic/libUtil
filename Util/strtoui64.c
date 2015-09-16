@@ -5,10 +5,15 @@
 #include "Util.h"
 
 /******************************************************************************
- * Functions equivalent to strtol(), etc., for other basic types.
+ * Function equivalent to strtoull() but for 'uint64_t'.  See
+ * strtous.c for the logic behind this code.
  *****************************************************************************/
 uint64_t strtoui64(const char *Str, char **End, int Base)
 { /* strtoui64(const char *, char **, int) */
+  /* We really have no idea what basic C type uint64_t might be so we
+   * need to check against both 'unsigned long' and 'unsigned long
+   * long'. */
+  
 #if UINT64_MAX == ULONG_MAX
   /* In the event that 'uint64_t' and 'unsigned long' are the same
    * size just call strtoul() and cast the result. */
@@ -19,29 +24,19 @@ uint64_t strtoui64(const char *Str, char **End, int Base)
    * same size just call strtoull() and cast the result. */
   return (uint64_t) strtoull(Str, End, Base);
 
-#elif UINT64_MAX < LONG_MAX
+#elif UINT64_MAX < LLONG_MAX
   int SavedErrNo;
   long long Val;
 
-  /* 
-   * If we are successful we must not modify errno.  However,
-   * to reliably detect errors in strtoul() we must set errno
-   * to zero.  So, ...
-   */
+  /* Save initial value of 'errno' */
   SavedErrNo = errno;
 
-  /* Convert to long long.  strtoull() silently converts negatives
-   * to positives so '-1' is indistinguishable from
-   * 0xffffffffffffffff.  To correctly mirror strtoull() for uint64_t
-   * we must return ERANGE for anything greater than 0xff or less
-   * than -0xff.  We do this by calling strtoll() (signed long
-   * long), checking the (signed) range of the result, and finally
-   * casting to uint64_t.  This is admittedly nasty but I don't see
-   * any other good way of doing it. */
+  /* Convert to 'long long'. */
   errno = 0;
   Val = strtoll(Str, End, Base);
 
-  /* Check for errors. */
+  /* Clamp the converted value to the range of an 'uint64_t'.  If
+   * 'errno' is not already set, set it to 'ERANGE' */
   if (Val > (long long) UINT64_MAX || Val < -((long long) UINT64_MAX))
   { /* Overflow. */
     Val = UINT64_MAX;
@@ -49,9 +44,12 @@ uint64_t strtoui64(const char *Str, char **End, int Base)
       errno = ERANGE;
   } /* Overflow. */
 
-  /* Return result. */
-  if (errno == 0)
+  else if (errno == 0)
+  { /* No other error so restore saved 'errno'. */
     errno = SavedErrNo;
+  } /* No other error so restore saved 'errno'. */
+
+  /* Return the result. */
   return (uint64_t) Val;
 #else
 #error "Can not implement strtoui64()."
