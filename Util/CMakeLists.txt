@@ -22,6 +22,8 @@ add_library(Util SHARED
   StrToFInt32.c StrToUFInt32.c
   StrToInt64.c StrToUInt64.c StrToLInt64.c StrToULInt64.c
   StrToFInt64.c StrToUFInt64.c
+
+  String.h String.c
 )
 set_target_properties(Util PROPERTIES VERSION 0.0.0 SONAME 0.0.0)
 
@@ -31,6 +33,6 @@ target_compile_options(Util PUBLIC -Wall)
 # Set up the install stuff.
 install(TARGETS Util LIBRARY DESTINATION lib)
 install(FILES
-  Util.h
+  Util.h String.h
   DESTINATION include
 )

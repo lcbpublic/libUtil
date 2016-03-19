@@ -4,11 +4,11 @@
 #   xargs rm < install_manifest.txt
 #
 # works too.
-if (NOT EXISTS "/home/lbest/Development/LibUtil/build/install_manifest.txt")
-    message(FATAL_ERROR "Cannot find install manifest: \"/home/lbest/Development/LibUtil/build/install_manifest.txt\"")
-endif(NOT EXISTS "/home/lbest/Development/LibUtil/build/install_manifest.txt")
+if (NOT EXISTS "/home/lbest/Development/libUtil/build/install_manifest.txt")
+    message(FATAL_ERROR "Cannot find install manifest: \"/home/lbest/Development/libUtil/build/install_manifest.txt\"")
+endif(NOT EXISTS "/home/lbest/Development/libUtil/build/install_manifest.txt")
 
-file(READ "/home/lbest/Development/LibUtil/build/install_manifest.txt" files)
+file(READ "/home/lbest/Development/libUtil/build/install_manifest.txt" files)
 string(REGEX REPLACE "\n" ";" files "${files}")
 list(REVERSE files)
 foreach (file ${files})

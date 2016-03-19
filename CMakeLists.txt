@@ -1,11 +1,11 @@
 # Global settings.
 cmake_minimum_required(VERSION 2.8)
-project(LibUtil)
+project(libUtil)
 
 # The version info.
-set(LibUtil_VERSION_MAJOR 0)
-set(LibUtil_VERSION_MINOR 0)
-set(LibUtil_VERSION_PATCH 0)
+set(libUtil_VERSION_MAJOR 0)
+set(libUtil_VERSION_MINOR 0)
+set(libUtil_VERSION_PATCH 3)
 configure_file(
   "${PROJECT_SOURCE_DIR}/Util/config.h.in"
   "${PROJECT_SOURCE_DIR}/Util/config.h"

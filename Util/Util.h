@@ -9,6 +9,17 @@ extern "C" {
 #endif
 
 /******************************************************************************
+ * Handy macros for simplifying return'ing from within the body of a
+ * function that requires cleanup on exit/error.  To use the single
+ * argument versions, the function _must_ declare a local ('auto')
+ * variable named 'RetVal' to hold the function return value.
+ *****************************************************************************/
+#define Return(val) RetVal = (val); goto RETURN
+#define Exit(val) RetVal = (val); goto EXIT
+#define ReturnVar(var, val) var = (val); goto RETURN
+#define ExitVar(var, val) varal = (val); goto EXIT
+
+/******************************************************************************
  * Functions for converting strings to various numeric types.  The
  * strtoX() functions are equivalent to strtol(), etc., for other
  * basic types.  The StrToX() functions do the conversions wqith
