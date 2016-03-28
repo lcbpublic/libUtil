@@ -2,7 +2,7 @@
 #include <limits.h>
 #include <ctype.h>
 
-#include "Util.h"
+#include "StrTo.h"
 
 /******************************************************************************
  * Function equivalent to strtol(), etc., for 'char'.

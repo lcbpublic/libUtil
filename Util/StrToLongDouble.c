@@ -2,7 +2,7 @@
 #include <limits.h>
 #include <ctype.h>
 
-#include "Util.h"
+#include "StrTo.h"
 
 /******************************************************************************
  * Equivalent to strtold() but with simplified error reporting.

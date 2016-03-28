@@ -1,7 +1,10 @@
 # Source files for the library.
-include_directories(../)
+include_directories(../ ./)
 add_library(Util SHARED
-  Util.h strtoc.c strtosc.c strtosc.c strtouc.c strtos.c strtous.c
+  Util.h Errors.h
+
+
+  StrTo.h strtoc.c strtosc.c strtosc.c strtouc.c strtos.c strtous.c
   strtoi.c strtoui.c
 
   strtoi8.c strtoui8.c strtoil8.c strtouil8.c strtoif8.c strtouif8.c
@@ -23,6 +26,7 @@ add_library(Util SHARED
   StrToInt64.c StrToUInt64.c StrToLInt64.c StrToULInt64.c
   StrToFInt64.c StrToUFInt64.c
 
+
   String.h String.c
 )
 set_target_properties(Util PROPERTIES VERSION 0.0.0 SONAME 0.0.0)
@@ -33,6 +37,6 @@ target_compile_options(Util PUBLIC -Wall)
 # Set up the install stuff.
 install(TARGETS Util LIBRARY DESTINATION lib)
 install(FILES
-  Util.h String.h
+  Util.h Errors.h StrTo.h String.h
   DESTINATION include
 )

@@ -2,7 +2,7 @@
 #include <limits.h>
 #include <stdint.h>
 
-#include "Util.h"
+#include "StrTo.h"
 
 /******************************************************************************
  * Function equivalent to strtoull() but for 'uint_least64_t'.  See

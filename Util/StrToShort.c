@@ -2,7 +2,7 @@
 #include <limits.h>
 #include <ctype.h>
 
-#include "Util.h"
+#include "StrTo.h"
 
 /******************************************************************************
  * Equivalent to strtos() but with simplified error reporting.

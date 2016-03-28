@@ -24,14 +24,16 @@ libUtil_la_SOURCES = strtoc.c strtosc.c strtouc.c strtos.c strtous.c \
 	StrToLInt8.c StrToULInt8.c StrToLInt16.c StrToULInt16.c \
 	StrToLInt32.c StrToULInt32.c StrToLInt64.c StrToULInt64.c \
 	StrToFInt8.c StrToUFInt8.c StrToFInt16.c StrToUFInt16.c \
-	StrToFInt32.c StrToUFInt32.c StrToFInt64.c StrToUFInt64.c
+	StrToFInt32.c StrToUFInt32.c StrToFInt64.c StrToUFInt64.c \
+	\
+	String.c
 
 libUtil_la_CFLAGS = $(AM_CFLAGS)
 #libUtil_la_CXXFLAGS = $(AM_CXXFLAGS)
 #libUtil_la_LIBADD = $(db_LIBS) $(gsl_LIBS) $(LIBM)
 libUtil_la_LDFLAGS = -no-undefined -version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)
 
-include_HEADERS = Util.h
+include_HEADERS = Util.h Errors.h StrTo.h String.h
 # pkginclude_HEADERS = 
 
 $(OBJECTS): libtool

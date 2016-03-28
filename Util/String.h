@@ -1,5 +1,10 @@
 #ifndef String_h
 #define String_h
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /******************************************************************************
  * A String 'class'.  The buffer containing the string is resized
  * dynamially as required.  We implement the "small string
@@ -98,7 +103,14 @@ extern String_t *NewStringChar(char Char, size_t Count);
 
 /* Destructor. */
 extern void StringDestroy(String_t *This);
-extern void StringDelete(String_t *This);
+static inline void StringDelete(String_t *This)
+{ /* StringDelete() */
+  if (This != NULL)
+  { /* Exists. */
+    StringDestroy(This);
+    free(This);
+  } /* Exists. */
+} /* StringDelete() */
 
 /* Make buffer at least 'MinSize' characters long. */
 extern bool StringReserve(String_t *This, size_t MinSize);

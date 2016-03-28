@@ -6,13 +6,13 @@ AC_PREREQ(2.67)
 # Library version.
 m4_define([Util_major_version],      [0])
 m4_define([Util_minor_version],      [0])
-m4_define([Util_micro_version],      [1])
+m4_define([Util_micro_version],      [3])
 m4_define([Util_version],
           [Util_major_version.Util_minor_version.Util_micro_version])
 
 m4_define([Util_interface],          [0])
 m4_define([Util_interface_age],      [0])
-m4_define([Util_interface_revision], [1])
+m4_define([Util_interface_revision], [3])
 #m4_define([Util_binary_age],    [0])
 
 # libtool version related macros.  See
@@ -31,6 +31,7 @@ m4_define([Util_lt_revision], [Util_interface_revision])
 # Start main autoconf stuff.
 AC_INIT(Util, Util_version, lcbpublic@gmail.com, Util)
 AC_CONFIG_SRCDIR([Util/strtoc.c])
+#AC_CONFIG_MACRO_DIRS([m4])
 AM_INIT_AUTOMAKE
 AC_LANG([C])
 

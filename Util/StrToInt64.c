@@ -2,7 +2,7 @@
 #include <limits.h>
 #include <ctype.h>
 
-#include "Util.h"
+#include "StrTo.h"
 
 /******************************************************************************
  * Equivalent to strtoi64() but with simplified error reporting.

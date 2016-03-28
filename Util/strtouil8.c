@@ -2,7 +2,7 @@
 #include <limits.h>
 #include <stdint.h>
 
-#include "Util.h"
+#include "StrTo.h"
 
 /******************************************************************************
  * Function equivalent to strtoul() but for uint_least8_t.  See

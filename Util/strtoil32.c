@@ -2,7 +2,7 @@
 #include <limits.h>
 #include <stdint.h>
 
-#include "Util.h"
+#include "StrTo.h"
 
 /******************************************************************************
  * Function equivalent to strtol() but for int_least32_t.  See

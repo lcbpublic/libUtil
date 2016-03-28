@@ -1,4 +1,4 @@
-#include "Util.h"
+#include "Errors.h"
 #include "String.h"
 
 /******************************************************************************
@@ -32,6 +32,8 @@ static inline size_t BuffSize(String_t *This)
  */
 static bool ResizeBuffExact(String_t *This, size_t NewSize)
 { /* ResizeBuffExact() */
+  bool _RetVal;
+  int ErrNo;
   size_t CurSize;
   char *NewBuff;
 
@@ -46,7 +48,7 @@ static bool ResizeBuffExact(String_t *This, size_t NewSize)
   /* See if we actually are changing the size. */
   if (NewSize == CurSize)
   { /* Nothing to do. */
-    return true;
+    RETURN(true);
   } /* Nothing to do. */
   
   /*
@@ -62,11 +64,10 @@ static bool ResizeBuffExact(String_t *This, size_t NewSize)
   { /* Need to call 'malloc()' */
     if ((NewBuff = malloc(NewSize)) == NULL)
     { /* Error. */
-      int ErrNo = errno;
+      ErrNo = errno;
       printf("%s %s %d: malloc(%zu) failed.  %s.\n",
              __FILE__, __func__, __LINE__, NewSize, strerror(errno));
-      errno = ErrNo;
-      return false;
+      EXIT(false);
     } /* Error. */
     if (!IsLocalBuff(This))
       free(This->Ptr);
@@ -81,8 +82,13 @@ static bool ResizeBuffExact(String_t *This, size_t NewSize)
     free(This->Ptr);
     This->Ptr = This->Buff.Data;
   } /* Need to use 'Buff.Data'. */
-  
-  return true;
+  RETURN(true);
+
+Exit:
+  errno = ErrNo;
+
+Return:
+  return _RetVal;
 } /* ResizeBuffExact() */
 
 /*
@@ -97,6 +103,8 @@ static bool ResizeBuffExact(String_t *This, size_t NewSize)
  */
 static bool ReallocBuffExact(String_t *This, size_t NewSize)
 { /* ReallocBuffExact() */
+  bool _RetVal;
+  int ErrNo;
   size_t CurSize;
   char *NewBuff;
 
@@ -111,7 +119,7 @@ static bool ReallocBuffExact(String_t *This, size_t NewSize)
   /* See if we are actually changing the size. */
   if (NewSize == CurSize)
   { /* Nothing to do. */
-    return true;
+    RETURN(true);
   } /* Nothing to do. */
   
   /*
@@ -130,11 +138,10 @@ static bool ReallocBuffExact(String_t *This, size_t NewSize)
     { /* Currently using the local buffer so we have to call 'malloc()'. */
       if ((NewBuff = malloc(NewSize)) == NULL)
       { /* Error. */
-        int ErrNo = errno;
+        ErrNo = errno;
         printf("%s %s %d: malloc(%zu) failed.  %s.\n",
                __FILE__, __func__, __LINE__, NewSize, strerror(errno));
-        errno = ErrNo;
-        return false;
+        EXIT(false);
       } /* Error. */
 
       /* We know the new buffer is bigger so copy the string and leave
@@ -145,11 +152,10 @@ static bool ReallocBuffExact(String_t *This, size_t NewSize)
     { /* Not using the local buffer. */
       if ((NewBuff = realloc(This->Ptr, NewSize)) == NULL)
       { /* Error. */
-        int ErrNo = errno;
+        ErrNo = errno;
         printf("%s %s %d: realloc(%zu) failed.  %s.\n",
                __FILE__, __func__, __LINE__, NewSize, strerror(errno));
-        errno = ErrNo;
-        return false;
+        EXIT(false);
       } /* Error. */
 
       /* 'realloc()' copied the contents for us, but it may not be
@@ -179,8 +185,13 @@ static bool ReallocBuffExact(String_t *This, size_t NewSize)
     free(This->Ptr);
     This->Ptr = This->Buff.Data;
   } /* Need to use 'Buff.Data'. */
-  
-  return true;
+  RETURN(true);
+
+Exit:
+  errno = ErrNo;
+
+Return:
+  return _RetVal;
 } /* ReallocBuffExact() */
 
 /*
@@ -206,6 +217,8 @@ static bool ReallocBuffExact(String_t *This, size_t NewSize)
  */
 static bool ResizeBuff(String_t *This, size_t MinSize)
 { /* ResizeBuff() */
+  bool _RetVal;
+  int ErrNo;
   size_t CurSize, NewSize, Temp;
 
   /* Get the current buffer size. */
@@ -214,7 +227,7 @@ static bool ResizeBuff(String_t *This, size_t MinSize)
   /* No change. */
   if (MinSize == CurSize)
   { /* Do nothing. */
-    return true;
+    RETURN(true);
   } /* Do nothing. */
   
   /* Grow buffer. */
@@ -242,11 +255,10 @@ static bool ResizeBuff(String_t *This, size_t MinSize)
     /* Get new buffer. */
     if (!ResizeBuffExact(This, NewSize))
     { /* Error. */
-      int ErrNo = errno;
+      ErrNo = errno;
       printf("%s %s %d: ResizeBuffExact(%zu) failed.  %s.\n",
              __FILE__, __func__, __LINE__, NewSize, strerror(ErrNo));
-      errno = ErrNo;
-      return false;
+      EXIT(false);
     } /* Error. */
   } /* Grow buffer. */
 
@@ -260,16 +272,20 @@ static bool ResizeBuff(String_t *This, size_t MinSize)
     /* Get new buffer. */
     if (!ResizeBuffExact(This, NewSize))
     { /* Error. */
-      int ErrNo = errno;
+      ErrNo = errno;
       printf("%s %s %d: ResizeBuffExact(%zu) failed.  %s.\n",
              __FILE__, __func__, __LINE__, NewSize, strerror(errno));
-      errno = ErrNo;
-      return false;
+      EXIT(false);
     } /* Error. */
   } /* Shrink buffer. */
 #endif
-  
-  return true;
+  RETURN(true);
+
+Exit:
+  errno = ErrNo;
+
+Return:
+  return _RetVal;
 } /* ResizeBuff() */
 
 /*
@@ -284,6 +300,8 @@ static bool ResizeBuff(String_t *This, size_t MinSize)
  */
 static bool ReallocBuff(String_t *This, size_t MinSize)
 { /* ReallocBuff() */
+  bool _RetVal;
+  int ErrNo;
   size_t CurSize, NewSize, Temp;
 
   /* Get the current buffer size. */
@@ -312,11 +330,10 @@ static bool ReallocBuff(String_t *This, size_t MinSize)
     /* Get new buffer. */
     if (!ReallocBuffExact(This, NewSize))
     { /* Error. */
-      int ErrNo = errno;
+      ErrNo = errno;
       printf("%s %s %d: ReallocBuffExact(%zu) failed.  %s.\n",
              __FILE__, __func__, __LINE__, NewSize, strerror(errno));
-      errno = ErrNo;
-      return false;
+      EXIT(false);
     } /* Error. */
   } /* Grow buffer. */
 
@@ -330,16 +347,20 @@ static bool ReallocBuff(String_t *This, size_t MinSize)
     /* Get new buffer. */
     if (!ReallocBuffExact(This, NewSize))
     { /* Error. */
-      int ErrNo = errno;
+      ErrNo = errno;
       printf("%s %s %d: ReallocBuff(%zu) failed.  %s.\n",
              __FILE__, __func__, __LINE__, NewSize, strerror(errno));
-      errno = ErrNo;
-      return false;
+      EXIT(false);
     } /* Error. */
   } /* Shrink buffer. */
 #endif
+  RETURN(true);
 
-  return true;
+Exit:
+  errno = ErrNo;
+
+Return:
+  return _RetVal;
 } /* ReallocBuff() */
 
 /******************************************************************************
@@ -349,7 +370,7 @@ static bool ReallocBuff(String_t *This, size_t MinSize)
 String_t *NewString()
 { /* NewString() */
   int ErrNo;
-  String_t *This, *RetVal;
+  String_t *This, *_RetVal;
 
   if ((This = malloc(sizeof(String_t))) == NULL)
   { /* Error. */
@@ -357,26 +378,26 @@ String_t *NewString()
     printf("%s %s %d: malloc(%zu) failed.  %s.\n",
            __FILE__, __func__, __LINE__, sizeof(String_t),
            strerror(errno));
-    Exit(NULL);
+    EXIT(NULL);
   } /* Error. */
 
   /* Default constructor.  We know this never fails if '(This != NULL)'. */
   StringConstruct(This);
-  Return(This);
+  RETURN(This);
 
-EXIT:
+Exit:
   free(This);
   errno = ErrNo;
   
-RETURN:
-  return RetVal;
+Return:
+  return _RetVal;
 } /* NewString() */
 
 /* Copy construstor. */
 bool StringConstructStr(String_t *This, const String_t *Src)
 { /* StringConstructStr() */
   int ErrNo;
-  bool Init = false, RetVal;
+  bool Init = false, _RetVal;
 
   /* Error checking. */
   if (This == NULL)
@@ -384,7 +405,7 @@ bool StringConstructStr(String_t *This, const String_t *Src)
     printf("%s %s %d: 'This' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(false);
+    EXIT(false);
   } /* Error. */
     
   if (Src == NULL)
@@ -392,7 +413,7 @@ bool StringConstructStr(String_t *This, const String_t *Src)
     printf("%s %s %d: 'Src' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(false);
+    EXIT(false);
   } /* Error. */
     
   /* Default constructor.  Never fails if '(This != NULL)'. */
@@ -405,31 +426,31 @@ bool StringConstructStr(String_t *This, const String_t *Src)
     printf("%s %s %d: ResizeBuff(This, %zu) failed.  %s.\n",
            __FILE__, __func__, __LINE__, Src->Size + 1,
            strerror(ErrNo));
-    Exit(false);
+    EXIT(false);
   } /* Error. */
   strcpy(This->Ptr, Src->Ptr);
   This->Size = Src->Size;
-  Return(true);
+  RETURN(true);
 
-EXIT:
+Exit:
   if (Init) StringDestroy(This);
   errno = ErrNo;
 
-RETURN:
-  return RetVal;
+Return:
+  return _RetVal;
 } /* StringConstructStr() */
 
 String_t *NewStringStr(const String_t *Src)
 { /* NewStringStr() */
   int ErrNo;
-  String_t *This = NULL, *RetVal;
+  String_t *This = NULL, *_RetVal;
 
   /* Error checking. */
   if (Src == NULL)
   { /* Error. */
     printf("%s %s %d: 'Src' is NULL.\n", __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(NULL);
+    EXIT(NULL);
   } /* Error. */
   
   if ((This = malloc(sizeof(String_t))) == NULL)
@@ -438,7 +459,7 @@ String_t *NewStringStr(const String_t *Src)
     printf("%s %s %d: malloc(%zu) failed.  %s.\n",
            __FILE__, __func__, __LINE__, sizeof(String_t),
            strerror(ErrNo));
-    Exit(NULL);
+    EXIT(NULL);
   } /* Error. */
 
   if (!StringConstructStr(This, Src))
@@ -446,22 +467,22 @@ String_t *NewStringStr(const String_t *Src)
     ErrNo = errno;
     printf("%s %s %d: StringConstuctStr() failed.  %s.\n",
            __FILE__, __func__, __LINE__, strerror(ErrNo));
-    Exit(NULL);
+    EXIT(NULL);
   } /* Error. */
-  Return(This);
+  RETURN(This);
 
-EXIT:
+Exit:
   free(This);
   errno = ErrNo;
 
-RETURN:
-  return RetVal;
+Return:
+  return _RetVal;
 } /* NewStringStr() */
 
 bool StringConstructCStr(String_t *This, const char *Src)
 { /* StringConstructCStr() */
   int ErrNo;
-  bool Init = false, RetVal;
+  bool Init = false, _RetVal;
   size_t SrcSize;
   
   /* Error checking. */
@@ -470,7 +491,7 @@ bool StringConstructCStr(String_t *This, const char *Src)
     printf("%s %s %d: 'This' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(false);
+    EXIT(false);
   } /* Error. */
 
   if (Src == NULL)
@@ -478,7 +499,7 @@ bool StringConstructCStr(String_t *This, const char *Src)
     printf("%s %s %d: 'Src' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(false);
+    EXIT(false);
   } /* Error. */
     
   /* Default consstructor. This never fails if '(This != NULL)'. */
@@ -491,24 +512,24 @@ bool StringConstructCStr(String_t *This, const char *Src)
     ErrNo = errno;
     printf("%s %s %d: ResizeBuff(This, %zu) failed.  %s.\n",
            __FILE__, __func__, __LINE__, SrcSize + 1, strerror(ErrNo));
-    Exit(false);
+    EXIT(false);
   } /* Error. */
   strcpy(This->Ptr, Src);
   This->Size = SrcSize;
-  Return(true);
+  RETURN(true);
 
-EXIT:
+Exit:
   if (Init) StringDestroy(This);
   errno = ErrNo;
 
-RETURN:
-  return RetVal;
+Return:
+  return _RetVal;
 } /* StringConstructCStr() */
 
 String_t *NewStringCStr(const char *Src)
 { /* NewStringCStr() */
   int ErrNo;
-  String_t *This = NULL, *RetVal;
+  String_t *This = NULL, *_RetVal;
 
   /* Error checking. */
   if (Src == NULL)
@@ -516,7 +537,7 @@ String_t *NewStringCStr(const char *Src)
     printf("%s %s %d: 'Src' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(NULL);
+    EXIT(NULL);
   } /* Error. */
   
   if ((This = malloc(sizeof(String_t))) == NULL)
@@ -525,7 +546,7 @@ String_t *NewStringCStr(const char *Src)
     printf("%s %s %d: malloc(%zu) failed.  %s.\n",
            __FILE__, __func__, __LINE__, sizeof(String_t),
            strerror(errno));
-    Exit(NULL);
+    EXIT(NULL);
   } /* Error. */
 
   if (!StringConstructCStr(This, Src))
@@ -533,21 +554,21 @@ String_t *NewStringCStr(const char *Src)
     ErrNo = errno;
     printf("%s %s %d: StringConstuctCStr() failed.  %s.\n",
            __FILE__, __func__, __LINE__, strerror(ErrNo));
-    Exit(NULL);
+    EXIT(NULL);
   } /* Error. */
-  Return(This);
+  RETURN(This);
 
-EXIT:
+Exit:
   free(This);
   errno = ErrNo;
 
-RETURN:
-  return RetVal;
+Return:
+  return _RetVal;
 } /* NewStringCStr() */
 
 bool StringConstructChar(String_t *This, char Char, size_t Count)
 { /* StringConstructChar() */
-  bool Init = false, ErrNo, RetVal;
+  bool Init = false, ErrNo, _RetVal;
 
   /* Error checking. */
   if (This == NULL)
@@ -555,7 +576,7 @@ bool StringConstructChar(String_t *This, char Char, size_t Count)
     printf("%s %s %d: 'This' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(false);
+    EXIT(false);
   } /* Error. */
   
   /* We know by construction this never fails if '(This != NULL)'. */
@@ -568,7 +589,7 @@ bool StringConstructChar(String_t *This, char Char, size_t Count)
     printf("%s %s %d: Overflow.  'Count' is SIZE_MAX.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = ERANGE;
-    Exit(false);
+    EXIT(false);
   } /* Error. */
     
   /* Make sure our buffer is big enough. */
@@ -577,7 +598,7 @@ bool StringConstructChar(String_t *This, char Char, size_t Count)
     ErrNo = errno;
     printf("%s %s %d: 'ResizeBuff(This, %zu)' failed.\n",
            __FILE__, __func__, __LINE__, Count + 1);
-    Exit(false);
+    EXIT(false);
   } /* Error. */
   /* Assign 'Char' as our value. */
 
@@ -585,20 +606,20 @@ bool StringConstructChar(String_t *This, char Char, size_t Count)
   memset(This->Ptr, Char, Count);
   This->Ptr[Count] = '\0';
   This->Size = Count;
-  Return(true);
+  RETURN(true);
   
-EXIT:
+Exit:
   if (Init) StringDestroy(This);
   errno = ErrNo;
 
-RETURN:
-  return RetVal;
+Return:
+  return _RetVal;
 } /* StringConstructChar() */
 
 String_t *NewStringChar(char Char, size_t Count)
 { /* NewStringChar() */
   int ErrNo;
-  String_t *This = NULL, *RetVal;
+  String_t *This = NULL, *_RetVal;
 
   if ((This = malloc(sizeof(String_t))) == NULL)
   { /* Error. */
@@ -606,7 +627,7 @@ String_t *NewStringChar(char Char, size_t Count)
     printf("%s %s %d: malloc(%zu) failed.  %s.\n",
            __FILE__, __func__, __LINE__, sizeof(String_t),
            strerror(errno));
-    Exit(NULL);
+    EXIT(NULL);
   } /* Error. */
 
   if (!StringConstructChar(This, Char, Count))
@@ -614,16 +635,16 @@ String_t *NewStringChar(char Char, size_t Count)
     ErrNo = errno;
     printf("%s %s %d: StringConstructChar(This, '%c', %zu) failed..\n",
            __FILE__, __func__, __LINE__, Char, Count);
-    Exit(NULL);
+    EXIT(NULL);
   } /* Error. */
-  Return(This);
+  RETURN(This);
 
-EXIT:
+Exit:
   free(This);
   errno = ErrNo;
   
-RETURN:
-  return RetVal;
+Return:
+  return _RetVal;
 } /* NewStringChar() */
 
 /* Desructor. */
@@ -635,18 +656,9 @@ void StringDestroy(String_t *This)
   } /* Exists, and not local buffer. */
 } /* StringDestroy() */
 
-void StringDelete(String_t *This)
-{ /* StringDelete() */
-  if (This != NULL)
-  { /* Exists. */
-    StringDestroy(This);
-    free(This);
-  } /* Exists. */
-} /* StringDelete() */
-
 bool StringReserve(String_t *This, size_t NewSize)
 { /* StringReserve() */
-  bool RetVal;
+  bool _RetVal;
   int ErrNo;
 
   /* Error checking */
@@ -655,7 +667,7 @@ bool StringReserve(String_t *This, size_t NewSize)
     printf("%s %s %d: 'This' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(false);
+    EXIT(false);
   } /* Error. */
 
   if (!ReallocBuff(This, NewSize))
@@ -663,20 +675,20 @@ bool StringReserve(String_t *This, size_t NewSize)
     ErrNo = errno;
     printf("%s %s %d: ReallocBuff(This, %zu) failed.  %s.\n",
            __FILE__, __func__, __LINE__, NewSize, strerror(ErrNo));
-    Exit(false);
+    EXIT(false);
   } /* Error. */
-  Return(true);
+  RETURN(true);
 
-EXIT:
+Exit:
   errno = ErrNo;
 
-RETURN:
-  return RetVal;
+Return:
+  return _RetVal;
 } /* StringReserve() */
 
 bool StringResizeToFit(String_t *This)
 { /* StringResizeToFit() */
-  bool RetVal;
+  bool _RetVal;
   int ErrNo;
 
   /* Error checking. */
@@ -685,7 +697,7 @@ bool StringResizeToFit(String_t *This)
     printf("%s %s %d: 'This' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(false);
+    EXIT(false);
   } /* Error. */
 
   /* Resize the buffer. */  
@@ -694,15 +706,15 @@ bool StringResizeToFit(String_t *This)
     ErrNo = errno;
     printf("%s %s %d: ReallocBuff(This, %zu) failed.  %s.\n",
            __FILE__, __func__, __LINE__, This->Size + 1, strerror(ErrNo));
-    Exit(false);
+    EXIT(false);
   } /* Error. */
-  Return(true);
+  RETURN(true);
 
-EXIT:
+Exit:
   errno = ErrNo;
 
-RETURN:
-  return RetVal;
+Return:
+  return _RetVal;
 } /* StringResizeToFit() */
 
 /*
@@ -711,7 +723,7 @@ RETURN:
  */
 bool StringSetCStr(String_t *This, const char *Src)
 { /* StringSetCStr() */
-  bool RetVal;
+  bool _RetVal;
   int ErrNo;
   size_t SrcSize;
 
@@ -721,7 +733,7 @@ bool StringSetCStr(String_t *This, const char *Src)
     printf("%s %s %d: 'This' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(false);
+    EXIT(false);
   } /* Error. */
 
   if (Src == NULL)
@@ -729,7 +741,7 @@ bool StringSetCStr(String_t *This, const char *Src)
     printf("%s %s %d: 'Src' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(false);
+    EXIT(false);
   } /* Error. */
 
   /* Get size of 'Src'.*/
@@ -741,19 +753,19 @@ bool StringSetCStr(String_t *This, const char *Src)
     ErrNo = errno;
     printf("%s %s %d: ResizeBuff(This, %zu) failed.  %s.\n",
            __FILE__, __func__, __LINE__, SrcSize + 1, strerror(ErrNo));
-    Exit(false);
+    EXIT(false);
   } /* Error. */
 
   /* Now we know we have enough space. */
   memcpy(This->Ptr, Src, SrcSize + 1);
   This->Size = SrcSize;
-  Return(true);
+  RETURN(true);
 
-EXIT:
+Exit:
   errno = ErrNo;
 
-RETURN:
-  return RetVal;
+Return:
+  return _RetVal;
 } /* StringSetCStr() */
 
 /*
@@ -762,7 +774,7 @@ RETURN:
  */
 bool StringSetStr(String_t *This, const String_t *Src)
 { /* StringSetStr() */
-  bool RetVal;
+  bool _RetVal;
   int ErrNo;
   
   /* Error checking. */
@@ -771,7 +783,7 @@ bool StringSetStr(String_t *This, const String_t *Src)
     printf("%s %s %d: 'This' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(false);
+    EXIT(false);
   } /* Error. */
 
   if (Src == NULL)
@@ -779,7 +791,7 @@ bool StringSetStr(String_t *This, const String_t *Src)
     printf("%s %s %d: 'Src' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(false);
+    EXIT(false);
   } /* Error. */
 
   /* Allocte a bigger buffer if we need to. */
@@ -788,19 +800,19 @@ bool StringSetStr(String_t *This, const String_t *Src)
     ErrNo = errno;
     printf("%s %s %d: ResizeBuff(This, %zu) failed.  %s.\n",
            __FILE__, __func__, __LINE__, Src->Size + 1, strerror(ErrNo));
-    Exit(false);
+    EXIT(false);
   } /* Error. */
 
   /* Now we know we have enough space. */
   memcpy(This->Ptr, Src->Ptr, Src->Size + 1);
   This->Size = Src->Size;
-  Return(true);
+  RETURN(true);
 
-EXIT:
+Exit:
   errno = ErrNo;
 
-RETURN:
-  return RetVal;
+Return:
+  return _RetVal;
 } /* StringSetStr() */
 
 /*
@@ -810,7 +822,7 @@ RETURN:
  */
 bool StringAppendCStr(String_t *This, const char *Src)
 { /* StringAppendCStr() */
-  bool RetVal;
+  bool _RetVal;
   int ErrNo;
   size_t SrcSize, NewSize;
 
@@ -820,7 +832,7 @@ bool StringAppendCStr(String_t *This, const char *Src)
     printf("%s %s %d: 'This' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(false);
+    EXIT(false);
   } /* Error. */
 
   if (Src == NULL)
@@ -828,7 +840,7 @@ bool StringAppendCStr(String_t *This, const char *Src)
     printf("%s %s %d: 'Src' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(false);
+    EXIT(false);
   } /* Error. */
 
   /* Compute new size.  As usual, we have to worry about overflow
@@ -839,7 +851,7 @@ bool StringAppendCStr(String_t *This, const char *Src)
     printf("%s %s %d: Size overflow.  This->Size: %zu  SrcSize: %zu.\n",
            __FILE__, __func__, __LINE__, This->Size, SrcSize);
     ErrNo = ERANGE;
-    Exit(false);
+    EXIT(false);
   } /* Result would overflow. */
   NewSize = This->Size + SrcSize;
 
@@ -849,19 +861,19 @@ bool StringAppendCStr(String_t *This, const char *Src)
     ErrNo = errno;
     printf("%s %s %d: ResizeBuff(This, %zu) failed.  %s.\n",
            __FILE__, __func__, __LINE__, SrcSize + 1, strerror(ErrNo));
-    Exit(false);
+    EXIT(false);
   } /* Error. */
 
   /* Now we know we have enough space. */
   memcpy(&This->Ptr[This->Size], Src, SrcSize + 1);
   This->Size = NewSize;
-  Return(true);
+  RETURN(true);
 
-EXIT:
+Exit:
   errno = ErrNo;
 
-RETURN:
-  return RetVal;
+Return:
+  return _RetVal;
 } /* StringAppendCStr() */
 
 /*
@@ -871,7 +883,7 @@ RETURN:
  */
 bool StringAppendStr(String_t *This, const String_t *Src)
 { /* StringAppendStr() */
-  bool RetVal;
+  bool _RetVal;
   int ErrNo;
   size_t NewSize;
 
@@ -881,7 +893,7 @@ bool StringAppendStr(String_t *This, const String_t *Src)
     printf("%s %s %d: 'This' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(false);
+    EXIT(false);
   } /* Error. */
 
   if (Src == NULL)
@@ -889,7 +901,7 @@ bool StringAppendStr(String_t *This, const String_t *Src)
     printf("%s %s %d: 'Src' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(false);
+    EXIT(false);
   } /* Error. */
 
   /* Compute new size.  As usual, we have to worry about overflow
@@ -899,7 +911,7 @@ bool StringAppendStr(String_t *This, const String_t *Src)
     printf("%s %s %d: Size overflow.  This->Size: %zu  Src->Size: %zu.\n",
            __FILE__, __func__, __LINE__, This->Size, Src->Size);
     ErrNo = ERANGE;
-    Exit(false);
+    EXIT(false);
   } /* Result would overflow. */
   NewSize = This->Size + Src->Size;
 
@@ -909,19 +921,19 @@ bool StringAppendStr(String_t *This, const String_t *Src)
     ErrNo = errno;
     printf("%s %s %d: ResizeBuff(This, %zu) failed.  %s.\n",
            __FILE__, __func__, __LINE__, Src->Size + 1, strerror(ErrNo));
-    Exit(false);
+    EXIT(false);
   } /* Error. */
 
   /* Now we know we have enough space. */
   memcpy(&This->Ptr[This->Size], Src->Ptr, Src->Size + 1);
   This->Size = NewSize;
-  Return(true);
+  RETURN(true);
 
-EXIT:
+Exit:
   errno = ErrNo;
 
-RETURN:
-  return RetVal;
+Return:
+  return _RetVal;
 } /* StringAppendStr() */
 
 /*
@@ -933,7 +945,7 @@ String_t *StringConcatCStr(String_t *This, const char *Src)
 { /* StringConcatCStr() */
   int ErrNo;
   size_t SrcSize, NewSize;
-  String_t *NewStr = NULL, *RetVal;
+  String_t *NewStr = NULL, *_RetVal;
 
   /* Error checking. */
   if (This == NULL)
@@ -941,7 +953,7 @@ String_t *StringConcatCStr(String_t *This, const char *Src)
     printf("%s %s %d: 'This' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(NULL);
+    EXIT(NULL);
   } /* Error. */
 
   if (Src == NULL)
@@ -949,7 +961,7 @@ String_t *StringConcatCStr(String_t *This, const char *Src)
     printf("%s %s %d: 'Src' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(NULL);
+    EXIT(NULL);
   } /* Error. */
 
   /* Compute new size.  As usual, we have to worry about overflow
@@ -960,7 +972,7 @@ String_t *StringConcatCStr(String_t *This, const char *Src)
     printf("%s %s %d: Size overflow.  This->Size: %zu  SrcSize: %zu.\n",
            __FILE__, __func__, __LINE__, This->Size, SrcSize);
     ErrNo = ERANGE;
-    Exit(NULL);
+    EXIT(NULL);
   } /* Result would overflow. */
   NewSize = This->Size + SrcSize;
 
@@ -970,7 +982,7 @@ String_t *StringConcatCStr(String_t *This, const char *Src)
     ErrNo = errno;
     printf("%s %s %d: StringNew() failed.  %s.\n",
            __FILE__, __func__, __LINE__, strerror(ErrNo));
-    Exit(NULL);
+    EXIT(NULL);
   } /* Error. */
   
   /* Allocte a bigger buffer if we need to. */
@@ -979,21 +991,21 @@ String_t *StringConcatCStr(String_t *This, const char *Src)
     ErrNo = errno;
     printf("%s %s %d: ResizeBuff(This, %zu) failed.  %s.\n",
            __FILE__, __func__, __LINE__, NewSize + 1, strerror(ErrNo));
-    Exit(NULL);
+    EXIT(NULL);
   } /* Error. */
 
   /* Now we know we have enough space. */
   memcpy(NewStr->Ptr, This->Ptr, This->Size);
   memcpy(&NewStr->Ptr[This->Size], Src, SrcSize + 1);
   NewStr->Size = NewSize;
-  Return(NewStr);
+  RETURN(NewStr);
 
-EXIT:
+Exit:
   StringDelete(NewStr);
   errno = ErrNo;
   
-RETURN:
-  return RetVal;
+Return:
+  return _RetVal;
 } /* StringConcatCStr() */
 
 /*
@@ -1005,7 +1017,7 @@ String_t *StringConcatStr(String_t *This, const String_t *Src)
 { /* StringConcatStr() */
   int ErrNo;
   size_t NewSize;
-  String_t *NewStr = NULL, *RetVal;
+  String_t *NewStr = NULL, *_RetVal;
 
   /* Error checking. */
   if (This == NULL)
@@ -1013,7 +1025,7 @@ String_t *StringConcatStr(String_t *This, const String_t *Src)
     printf("%s %s %d: 'This' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(NULL);
+    EXIT(NULL);
   } /* Error. */
 
   if (Src == NULL)
@@ -1021,7 +1033,7 @@ String_t *StringConcatStr(String_t *This, const String_t *Src)
     printf("%s %s %d: 'Src' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(NULL);
+    EXIT(NULL);
   } /* Error. */
 
   /* Compute new size.  As usual, we have to worry about overflow
@@ -1031,7 +1043,7 @@ String_t *StringConcatStr(String_t *This, const String_t *Src)
     printf("%s %s %d: Size overflow.  This->Size: %zu  SrcSize: %zu.\n",
            __FILE__, __func__, __LINE__, This->Size, Src->Size);
     ErrNo = ERANGE;
-    Exit(NULL);
+    EXIT(NULL);
   } /* Result would overflow. */
   NewSize = This->Size + Src->Size;
 
@@ -1041,7 +1053,7 @@ String_t *StringConcatStr(String_t *This, const String_t *Src)
     ErrNo = errno;
     printf("%s %s %d: NewString() failed.  %s.\n",
            __FILE__, __func__, __LINE__, strerror(ErrNo));
-    Exit(NULL);
+    EXIT(NULL);
   } /* Error. */
   
   /* Allocte a bigger buffer if we need to. */
@@ -1050,27 +1062,27 @@ String_t *StringConcatStr(String_t *This, const String_t *Src)
     ErrNo = errno;
     printf("%s %s %d: ResizeBuff(This, %zu) failed.  %s.\n",
            __FILE__, __func__, __LINE__, NewSize + 1, strerror(ErrNo));
-    Exit(NULL);
+    EXIT(NULL);
   } /* Error. */
 
   /* Now we know we have enough space. */
   memcpy(NewStr->Ptr, This->Ptr, This->Size);
   memcpy(&NewStr->Ptr[This->Size], Src->Ptr, Src->Size + 1);
   NewStr->Size = NewSize;
-  Return(NewStr);
+  RETURN(NewStr);
 
-EXIT:
+Exit:
   StringDelete(NewStr);
   errno = ErrNo;
   
-RETURN:
-  return RetVal;
+Return:
+  return _RetVal;
 } /* StringConcatStr() */
 
 /* Analogous to sprintf(). */
 int StringPrintf(String_t *This, const char *Fmt, ...)
 { /* StringPrintf() */
-  int FullSize, NewFullSize, RetVal, ErrNo;
+  int FullSize, NewFullSize, _RetVal, ErrNo;
   size_t CurSize;
   va_list ap;
 
@@ -1080,7 +1092,7 @@ int StringPrintf(String_t *This, const char *Fmt, ...)
     printf("%s %s %d: 'This' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(EOF);
+    EXIT(EOF);
   } /* Error. */
 
   if (Fmt == NULL)
@@ -1088,7 +1100,7 @@ int StringPrintf(String_t *This, const char *Fmt, ...)
     printf("%s %s %d: 'Fmt' is NULL.\n",
            __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(EOF);
+    EXIT(EOF);
   } /* Error. */
 
   CurSize = BuffSize(This);
@@ -1106,7 +1118,7 @@ int StringPrintf(String_t *This, const char *Fmt, ...)
 
     printf("%s %s %d: vsnprint(This->Ptr, %zu, Fmt, ap) failed.  %s.\n",
            __FILE__,  __func__, __LINE__, CurSize, strerror(errno));
-    Exit(FullSize);
+    EXIT(FullSize);
   } /* Error (other than buffer overflow). */
   
   if (FullSize >= CurSize)
@@ -1120,7 +1132,7 @@ int StringPrintf(String_t *This, const char *Fmt, ...)
       ErrNo = errno;
       printf("%s %s %d: ResizeBuff(This, %d) failed.  %s.\n",
              __FILE__,  __func__, __LINE__, FullSize + 1, strerror(ErrNo));
-      Exit(EOF);
+      EXIT(EOF);
     } /* Error. */
 
     /* Try with our new buffer. */
@@ -1137,7 +1149,7 @@ int StringPrintf(String_t *This, const char *Fmt, ...)
 
       printf("%s %s %d: vsnprint(This->Ptr, %zu, Fmt, ap) failed.  %s.\n",
              __FILE__,  __func__, __LINE__, CurSize, strerror(errno));
-      Exit(NewFullSize);
+      EXIT(NewFullSize);
     } /* Error (other than buffer overflow). */
 
     if (NewFullSize != FullSize)
@@ -1150,24 +1162,24 @@ int StringPrintf(String_t *This, const char *Fmt, ...)
              "  This should never happen!\n", __FILE__, __func__, __LINE__,
              BuffSize(This), FullSize, NewFullSize);
       ErrNo = ENOMEM;
-      Exit(EOF);
+      EXIT(EOF);
     } /* Error.  This should never happen! */
   } /* Ran out off space. */
   This->Size = FullSize;
-  Return(FullSize);
+  RETURN(FullSize);
 
-EXIT:
+Exit:
   errno = ErrNo;
 
-RETURN:
-  return RetVal;
+Return:
+  return _RetVal;
 } /* StringPrintf() */
 
 /* Like 'StringPrintf()' but appends output to the current contents of
  * 'This'. */
 int StringStreamf(String_t *This, const char *Fmt, ...)
 { /* StringStreamf() */
-  int FullSize, NewFullSize, ErrNo, RetVal;
+  int FullSize, NewFullSize, ErrNo, _RetVal;
   size_t CurSize;
   va_list ap;
 
@@ -1176,14 +1188,14 @@ int StringStreamf(String_t *This, const char *Fmt, ...)
   { /* Error. */
     printf("%s %s %d: 'This' is NULL.\n", __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(EOF);
+    EXIT(EOF);
   } /* Error. */
 
   if (Fmt == NULL)
   { /* Error. */
     printf("%s %s %d: 'Fmt' is NULL.\n", __FILE__, __func__, __LINE__);
     ErrNo = EFAULT;
-    Exit(EOF);
+    EXIT(EOF);
   } /* Error. */
 
   CurSize = BuffSize(This);
@@ -1202,7 +1214,7 @@ int StringStreamf(String_t *This, const char *Fmt, ...)
     printf("%s %s %d: 'vsnprint(&This->Ptr[%zu], %zu, Fmt, ap)' failed.  %s.\n",
            __FILE__,  __func__, __LINE__, This->Size, CurSize - This->Size,
            strerror(errno));
-    Exit(FullSize);
+    EXIT(FullSize);
   } /* Error (other than buffer overflow). */
 
   /* Add size of existing contents. */
@@ -1220,7 +1232,7 @@ int StringStreamf(String_t *This, const char *Fmt, ...)
       ErrNo = errno;
       printf("%s %s %d: ReallocBuff(This, %d) failed.  %s.\n",
              __FILE__,  __func__, __LINE__, FullSize + 1, strerror(ErrNo));
-      Exit(EOF);
+      EXIT(EOF);
     } /* Error. */
 
     /* Try with our new buffer. */
@@ -1238,7 +1250,7 @@ int StringStreamf(String_t *This, const char *Fmt, ...)
 
       printf("%s %s %d: 'vsnprint(This->Ptr, %zu, Fmt, ap)' failed.  %s.\n",
              __FILE__,  __func__, __LINE__, CurSize, strerror(ErrNo));
-      Exit(NewFullSize);
+      EXIT(NewFullSize);
     } /* Error (other than buffer overflow). */
     NewFullSize += This->Size;
     
@@ -1252,15 +1264,15 @@ int StringStreamf(String_t *This, const char *Fmt, ...)
              "  This should never happen!\n", __FILE__, __func__, __LINE__,
              BuffSize(This) - This->Size, FullSize, NewFullSize);
       ErrNo = ENOMEM;
-      Exit(EOF);
+      EXIT(EOF);
     } /* Error.  This should never happen! */
   } /* Ran out off space. */
   This->Size = FullSize;
-  Return(FullSize);
+  RETURN(FullSize);
 
-EXIT:
+Exit:
   errno = ErrNo;
 
-RETURN:
-  return RetVal;
+Return:
+  return _RetVal;
 } /* StringStreamf() */

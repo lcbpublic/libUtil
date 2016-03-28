@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <limits.h>
 
-#include "Util.h"
+#include "StrTo.h"
 
 /******************************************************************************
  * Equivalent to 'strtoc()' but with simplified error reporting.

@@ -2,7 +2,7 @@
 #include <limits.h>
 #include <ctype.h>
 
-#include "Util.h"
+#include "StrTo.h"
 
 /******************************************************************************
  * Equivalent to strtouif32() but with simplified error reporting.

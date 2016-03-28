@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <limits.h>
 
-#include "Util.h"
+#include "StrTo.h"
 
 /******************************************************************************
  * Function equivalent to strtoul() but for 'unsigned short'.
