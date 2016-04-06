@@ -22,6 +22,9 @@
  * 'EXIT' does the same but jumps to 'Exit'.  This allows "normal" and
  * "error" exits to do different things.
  *****************************************************************************/
+#ifndef RETVAL
+#define RETVAL _RetVal
+#endif
 #define RETURN(val) RETVAL = (val); goto Return
 #define EXIT(val) RETVAL = (val); goto Exit
 

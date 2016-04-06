@@ -10,29 +10,42 @@ extern "C" {
 
 /******************************************************************************
  * Functions for converting strings to various numeric types.  The
- * strtoX() functions are equivalent to strtol(), etc., for other
- * basic types.  The StrToX() functions do the conversions with
- * greatly simplified error semantics.
+ * 'strtoX()' functions are equivalent to 'strtol()', etc., for other
+ * basic types with the exceptions of 'strtochar()', 'strtoschar()',
+ * and 'strtouchar()'.  The latter three return the first "character"
+ * from 'Str' including characters repreesented by escape sequences.
+ *
+ * The StrToX() functions do the same conversions but with greatly
+ * simplified (and restrictive) error semantics.
  *****************************************************************************/
 /******************************************************************************
  * Functions equivalent to strtol(), etc., for other basic types.
  *
- * WARNING: All the strtox() functions except strtoc(), strtosc() and
- * strtouc() (which we wrote from scratch) are in turn based on
- * strtol(), strtoul(), strtoll(), strtoull(), strtof(), strtod(), or
- * strtold().  These underlying functions have error semantics which
- * are at best awkward, and at worst undefined.  Read both the Linux
- * man pages, and the Open Group's "The Single Unix Specification" /
- * POSIX.1-2008 spec carefully(!) as the corresponding functions
- * declared here (strtos(), etc.) have exactly analogous error
- * semantics.
+ * WARNING: All the 'strtoX()' functions except 'strtochar()',
+ * 'strtoschar()', and 'strtouchar()' (which we wrote from scratch)
+ * are in turn based on 'strtol()', 'strtoul()', 'strtoll()', and
+ * 'strtoull()'.  These underlying functions have error semantics
+ * which are at best awkward, and at worst undefined.  Read both the
+ * Linux man pages, and the Open Group's "The Single Unix
+ * Specification" / POSIX.1-2008 spec carefully(!) as the
+ * corresponding functions declared here ('strtos()', etc.) have
+ * exactly analogous error semantics.
  *****************************************************************************/
-  /* These interpret C escape sequences in Str. */
-  extern char strtoc(const char *Str, char **End);
-  extern signed char strtosc(const char *Str, char **End);
-  extern unsigned char strtouc(const char *Str, char **End);
+  /* These interpret C escape sequences in 'Str'.  NOTE: These
+   * functions do _not_ understand the '\unnnn' and '\Unnnn' escape
+   * sequences since these can translate to a multi-char sequence and
+   * we only return a single character.  */
+  extern char strtochar(const char *Str, char **End);
+  extern signed char strtoschar(const char *Str, char **End);
+  extern unsigned char strtouchar(const char *Str, char **End);
 
-  /* These are all numeric. */
+  /* These are all numeric.  WARNING: Make sure you really know what
+   * you're doing before using 'strtoc()'.  Since 'char' may be either
+   * signed or unsigned, it may behave like either 'strtosc()' or
+   * 'strtouc()' depending. */
+  static inline char strtoc(const char *Str, char **End, int Base);
+  extern signed char strtosc(const char *Str, char **End, int Base);
+  extern unsigned char strtouc(const char *Str, char **End, int Base);
   extern short strtos(const char *Str, char **End, int Base);
   extern unsigned short strtous(const char *Str, char **End, int Base);
   extern int strtoi(const char *Str, char **End, int Base);
@@ -70,7 +83,7 @@ extern "C" {
 
 /******************************************************************************
  * The StrToX() functions we provide below have much simpler error
- * semantics.  They are simply:
+ * semantics.  They are:
  *
  * 1) On success, the functions return 0 and the converted value is
  *    returned in '*Val'.
@@ -87,10 +100,10 @@ extern "C" {
  *        required type (including passing negative numbers to
  *        StrToUX()), then ERANGE is returned.
  *
- *   2.4) For functions that take a 'Base' argument, if (Base != 0 &&
- *        (Base < 2 || Base > 36)), then EDOM is returned.
+ *   2.4) For functions that take a 'Base' argument, if '(Base != 0 &&
+ *        (Base < 2 || Base > 36))', then EDOM is returned.
  *
- *   2.5) Should the underlying strtox() function set 'errno' to any
+ *   2.5) Should the underlying 'strtoX()' function sets 'errno' to any
  *        value other than 0, EINVAL, or ERANGE, that value is
  *        returned and '*Val' is unchanged.
  *
@@ -112,12 +125,21 @@ extern "C" {
  *
  *   // Use Val.
  *****************************************************************************/
-  /* These interpret C escape sequences in Str. */
-  extern int StrToChar(const char *Str, char *Val);
-  extern int StrToSChar(const char *Str, signed char *Val);
-  extern int StrToUChar(const char *Str, unsigned char *Val);
+  /* These interpret C escape sequences in 'Str'.  NOTE: These
+   * functions do _not_ understand the '\unnnn' and '\Unnnn' escape
+   * sequences since these can translate to a multi-char sequence and
+   * we only return a single character.  */
+  extern int StrToEscChar(const char *Str, char *Val);
+  extern int StrToEscSChar(const char *Str, signed char *Val);
+  extern int StrToEscUChar(const char *Str, unsigned char *Val);
 
-  /* These are all numeric. */
+  /* These are all numeric.  WARNING: Make sure you really know what
+   * you're doing before using 'StrToChar()'.  Since 'char' may be
+   * either signed or unsigned, it may behave like either
+   * 'StrToSChar()' or 'StrToUChar()' depending. */
+  static inline int StrToChar(const char *Str, int Base, char *Val);
+  extern int StrToSChar(const char *Str, int Base, signed char *Val);
+  extern int StrToUChar(const char *Str, int Base, unsigned char *Val);
   extern int StrToShort(const char *Str, int Base, short *Val);
   extern int StrToUShort(const char *Str, int Base, unsigned short *Val);
   extern int StrToInt(const char *Str, int Base, int *Val);
@@ -160,6 +182,32 @@ extern "C" {
   extern int StrToUFInt32(const char *Str, int Base, uint_fast32_t *Val);
   extern int StrToFInt64(const char *Str, int Base, int_fast64_t *Val);
   extern int StrToUFInt64(const char *Str, int Base, uint_fast64_t *Val);
+
+/******************************************************************************
+ * Inline method definitions.
+ *****************************************************************************/
+  static inline char strtoc(const char *Str, char **End, int Base)
+  { /* strtoc() */
+#if CHAR_MIN == SCHAR_MIN && CHAR_MAX == SCHAR_MAX
+    return (char) strtosc(Str, End, Base);
+#elif CHAR_MIN == UCHAR_MIN && CHAR_MAX == UCHAR_MAX
+    return (char) strtouc(Str, End, Base);
+#else
+#error "Can not implement strtoc()."
+#endif
+  } /* strtoc() */
+
+  static inline int StrToChar(const char *Str, int Base, char *Val)
+  { /* StrToChar() */
+#if CHAR_MIN == SCHAR_MIN && CHAR_MAX == SCHAR_MAX
+    return StrToSChar(Str, Base, (signed char *) Val);
+#elif CHAR_MIN == UCHAR_MIN && CHAR_MAX == UCHAR_MAX
+    return StrToUChar(Str, Base, (unsigned char *) Val);
+#else
+#error "Can not implement StrToChar()."
+#endif
+  } /* strtoc() */
+
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

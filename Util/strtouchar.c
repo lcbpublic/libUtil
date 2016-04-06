@@ -5,12 +5,35 @@
 #include "StrTo.h"
 
 /******************************************************************************
- * Function equivalent to strtol(), etc., for 'char'.
+ * Function to convert the string 'Str' to an 'unsigned char'.  The
+ * function interprets escape sequences in 'Str' (e.g. "\n", "\x0d",
+ * etc.).  The recognized escape sequences are:
+ *
+ *   \a      Audible alert ("bell")
+ *   \b      Backspace
+ *   \f      Form-feed/new page
+ *   \n      New line
+ *   \r      Carriage return
+ *   \t      Horizontal tab
+ *   \v      Vertical tab
+ *   \xdd    Hexidecimal value
+ *   \ddd    Octal value
+ *   \<char> Same as just the character <char> (i.e. "\k" -> 'k').
+ *
+ * Behavior is undefined if 'Str' is 'NULL'.  If the conversion is
+ * successful the function returns the converted character,and, if
+ * '*End' is not 'NULL', sets it to point to the first unused
+ * character in 'Str'.  If 'Str' is is empty (i.e. '(*Str == '\0')),
+ * or if 'Str' starts with '\x' but is not followed by a hex digit,
+ * then the function returns 0, and sets '*End' to 'Str'.  (This is
+ * what 'strtol()' et al do when "no digits are found".)  If a numeric
+ * escape sequence is not representable as a `unsigned char', then the
+ * function returns 'UCHAR_MAX' and sets 'errno' to 'ERANGE'.
  *****************************************************************************/
-char strtoc(const char *Str, char **End)
-{ /* strtoc(char *, char **) */
+unsigned char strtouchar(const char *Str, char **End)
+{ /* strtouchar(char *, char **) */
   const char *Src;
-  char Char;
+  unsigned char Char;
 
   Src = Str;
   switch (*Src)
@@ -111,7 +134,7 @@ char strtoc(const char *Str, char **End)
             /* Check for errors. */
             if (HexVal > UCHAR_MAX)
             { /* Out of range. */
-              HexVal = CHAR_MAX;
+              HexVal = UCHAR_MAX;
               if (errno == 0)
                 errno = ERANGE;
             } /* Out of range. */
@@ -121,7 +144,7 @@ char strtoc(const char *Str, char **End)
               errno = SavedErrNo;
             } /* No errors. */
 
-            Char = (char) HexVal;
+            Char = (unsigned char) HexVal;
           } /* Hexidecimal character code. */
         } /* '\x' */
         break;
@@ -156,7 +179,7 @@ char strtoc(const char *Str, char **End)
           /* Check for errors. */
           if (OctVal > UCHAR_MAX)
           { /* Out of range. */
-            OctVal = CHAR_MAX;
+            OctVal = UCHAR_MAX;
             if (errno == 0)
               errno = ERANGE;
           } /* Out of range. */
@@ -166,7 +189,7 @@ char strtoc(const char *Str, char **End)
             errno = SavedErrNo;
           } /* No errors. */
 
-          Char = (char) OctVal;
+          Char = (unsigned char) OctVal;
         } /* Octal character code. */
         break;
 
@@ -187,4 +210,4 @@ char strtoc(const char *Str, char **End)
   if (End != NULL)
     *End = (char *) Src;
   return Char;
-} /* strtoc(char *, char **) */
+} /* strtouchar(char *, char **) */

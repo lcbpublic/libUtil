@@ -1,18 +1,23 @@
 # Source files for the library.
 include_directories(../ ./)
 add_library(Util SHARED
-  Util.h Errors.h
+  Util.h
 
 
-  StrTo.h strtoc.c strtosc.c strtosc.c strtouc.c strtos.c strtous.c
-  strtoi.c strtoui.c
+  StrTo.h
+  strtochar.c strtoschar.c strtouchar.c
+  
+  strtosc.c strtouc.c strtos.c strtous.c strtoi.c strtoui.c
 
-  strtoi8.c strtoui8.c strtoil8.c strtouil8.c strtoif8.c strtouif8.c
-  strtoi16.c strtoui16.c strtoil16.c strtouil16.c strtoif16.c strtouif16.c
-  strtoi32.c strtoui32.c strtoil32.c strtouil32.c strtoif32.c strtouif32.c
-  strtoi64.c strtoui64.c strtoil64.c strtouil64.c strtoif64.c strtouif64.c
+  strtoi8.c strtoui8.c strtoil8.c strtouil8.c
+  strtoif8.c strtouif8.c strtoi16.c strtoui16.c strtoil16.c
+  strtouil16.c strtoif16.c strtouif16.c strtoi32.c strtoui32.c
+  strtoil32.c strtouil32.c strtoif32.c strtouif32.c strtoi64.c
+  strtoui64.c strtoil64.c strtouil64.c strtoif64.c strtouif64.c
 
-  StrToChar.c StrToSChar.c StrToUChar.c StrToShort.c StrToUShort.c
+  StrToEscChar.c StrToEscSChar.c StrToEscUChar.c
+  
+  StrToSChar.c StrToUChar.c StrToShort.c StrToUShort.c
   StrToInt.c StrToUInt.c StrToLong.c StrToULong.c
   StrToLongLong.c StrToULongLong.c
   StrToFloat.c StrToDouble.c StrToLongDouble.c
@@ -28,6 +33,9 @@ add_library(Util SHARED
 
 
   String.h String.c
+
+
+  Errors.h
 )
 set_target_properties(Util PROPERTIES VERSION 0.0.0 SONAME 0.0.0)
 

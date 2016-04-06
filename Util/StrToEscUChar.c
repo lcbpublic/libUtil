@@ -4,7 +4,7 @@
 #include "StrTo.h"
 
 /******************************************************************************
- * Equivalent to 'strtoc()' but with simplified error reporting.
+ * Equivalent to strtouc() but with simplified error reporting.
  * Returns the 'errno' value rather than setting the global 'errno'.
  * The global 'errno' is always left unchanged.  It is an error not to
  * use all of 'Str', or for (*Str == '\0').  Returns ERANGE on
@@ -12,13 +12,13 @@
  * function returns non-zero then '*Val' is unchanged.  In all cases
  * neither 'Str' nor 'Val' may be NULL.
  *****************************************************************************/
-int StrToChar(const char *Str, char *Val)
-{ /* StrToChar(char *, char *) */
-  char NewVal;
-  char *End = NULL;
+int StrToEscUChar(const char *Str, unsigned char *Val)
+{ /* StrToEscUChar(char *, char *) */
+  unsigned char NewVal;
+  char *End;
   int SavedErrNo, ErrNo;
 
-  /* NULL checking. */
+  /* Error checking. */
   if (Str == NULL || Val == NULL)
   { /* Error. */
     return EFAULT;
@@ -36,11 +36,11 @@ int StrToChar(const char *Str, char *Val)
 
   /* Do the conversion. */
   errno = 0;
-  NewVal = strtoc(Str, &End);
+  NewVal = strtouchar(Str, &End);
   ErrNo = errno;
 
   /* Check for errors. */
-  if (End == NULL || End == Str || *End != '\0')
+  if (End == Str || *End != '\0')
   { /* Error. */
     ErrNo = EINVAL;
   } /* Error. */
@@ -53,4 +53,4 @@ int StrToChar(const char *Str, char *Val)
   /* Restore global 'errno' and return 'ErrNo'. */
   errno = SavedErrNo;
   return ErrNo;
-} /* StrToChar(char *, char *) */
+} /* StrToEscUChar(char *, unsigned char *) */

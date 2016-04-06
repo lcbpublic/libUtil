@@ -382,7 +382,7 @@ String_t *NewString()
   } /* Error. */
 
   /* Default constructor.  We know this never fails if '(This != NULL)'. */
-  StringConstruct(This);
+  ConstructString(This);
   RETURN(This);
 
 Exit:
@@ -394,8 +394,8 @@ Return:
 } /* NewString() */
 
 /* Copy construstor. */
-bool StringConstructStr(String_t *This, const String_t *Src)
-{ /* StringConstructStr() */
+bool ConstructStringStr(String_t *This, const String_t *Src)
+{ /* ConstructStringStr() */
   int ErrNo;
   bool Init = false, _RetVal;
 
@@ -417,7 +417,7 @@ bool StringConstructStr(String_t *This, const String_t *Src)
   } /* Error. */
     
   /* Default constructor.  Never fails if '(This != NULL)'. */
-  Init = StringConstruct(This);
+  Init = ConstructString(This);
 
   /* Assign 'Src' as our value. */
   if (!ResizeBuff(This, Src->Size + 1))
@@ -433,12 +433,12 @@ bool StringConstructStr(String_t *This, const String_t *Src)
   RETURN(true);
 
 Exit:
-  if (Init) StringDestroy(This);
+  if (Init) DestroyString(This);
   errno = ErrNo;
 
 Return:
   return _RetVal;
-} /* StringConstructStr() */
+} /* ConstructStringStr() */
 
 String_t *NewStringStr(const String_t *Src)
 { /* NewStringStr() */
@@ -462,7 +462,7 @@ String_t *NewStringStr(const String_t *Src)
     EXIT(NULL);
   } /* Error. */
 
-  if (!StringConstructStr(This, Src))
+  if (!ConstructStringStr(This, Src))
   { /* Error. */
     ErrNo = errno;
     printf("%s %s %d: StringConstuctStr() failed.  %s.\n",
@@ -479,8 +479,8 @@ Return:
   return _RetVal;
 } /* NewStringStr() */
 
-bool StringConstructCStr(String_t *This, const char *Src)
-{ /* StringConstructCStr() */
+bool ConstructStringCStr(String_t *This, const char *Src)
+{ /* ConstructStringCStr() */
   int ErrNo;
   bool Init = false, _RetVal;
   size_t SrcSize;
@@ -503,7 +503,7 @@ bool StringConstructCStr(String_t *This, const char *Src)
   } /* Error. */
     
   /* Default consstructor. This never fails if '(This != NULL)'. */
-  Init = StringConstruct(This);
+  Init = ConstructString(This);
 
   /* Assign 'Src' as our value. */
   SrcSize = strlen(Src);
@@ -519,12 +519,12 @@ bool StringConstructCStr(String_t *This, const char *Src)
   RETURN(true);
 
 Exit:
-  if (Init) StringDestroy(This);
+  if (Init) DestroyString(This);
   errno = ErrNo;
 
 Return:
   return _RetVal;
-} /* StringConstructCStr() */
+} /* ConstructStringCStr() */
 
 String_t *NewStringCStr(const char *Src)
 { /* NewStringCStr() */
@@ -549,7 +549,7 @@ String_t *NewStringCStr(const char *Src)
     EXIT(NULL);
   } /* Error. */
 
-  if (!StringConstructCStr(This, Src))
+  if (!ConstructStringCStr(This, Src))
   { /* Error. */
     ErrNo = errno;
     printf("%s %s %d: StringConstuctCStr() failed.  %s.\n",
@@ -566,8 +566,8 @@ Return:
   return _RetVal;
 } /* NewStringCStr() */
 
-bool StringConstructChar(String_t *This, char Char, size_t Count)
-{ /* StringConstructChar() */
+bool ConstructStringChar(String_t *This, char Char, size_t Count)
+{ /* ConstructStringChar() */
   bool Init = false, ErrNo, _RetVal;
 
   /* Error checking. */
@@ -580,7 +580,7 @@ bool StringConstructChar(String_t *This, char Char, size_t Count)
   } /* Error. */
   
   /* We know by construction this never fails if '(This != NULL)'. */
-  Init = StringConstruct(This);
+  Init = ConstructString(This);
 
   /* Make sure 'Count' is not too big.  We need space for the
    * terminating NUL. */
@@ -609,12 +609,12 @@ bool StringConstructChar(String_t *This, char Char, size_t Count)
   RETURN(true);
   
 Exit:
-  if (Init) StringDestroy(This);
+  if (Init) DestroyString(This);
   errno = ErrNo;
 
 Return:
   return _RetVal;
-} /* StringConstructChar() */
+} /* ConstructStringChar() */
 
 String_t *NewStringChar(char Char, size_t Count)
 { /* NewStringChar() */
@@ -630,10 +630,10 @@ String_t *NewStringChar(char Char, size_t Count)
     EXIT(NULL);
   } /* Error. */
 
-  if (!StringConstructChar(This, Char, Count))
+  if (!ConstructStringChar(This, Char, Count))
   { /* Error. */
     ErrNo = errno;
-    printf("%s %s %d: StringConstructChar(This, '%c', %zu) failed..\n",
+    printf("%s %s %d: ConstructStringChar(This, '%c', %zu) failed..\n",
            __FILE__, __func__, __LINE__, Char, Count);
     EXIT(NULL);
   } /* Error. */
@@ -648,13 +648,13 @@ Return:
 } /* NewStringChar() */
 
 /* Desructor. */
-void StringDestroy(String_t *This)
-{ /* StringDestroy() */
+void DestroyString(String_t *This)
+{ /* DestroyString() */
   if (This != NULL && !IsLocalBuff(This))
   { /* Exists, and not local buffer. */
     free(This->Ptr);
   } /* Exists, and not local buffer. */
-} /* StringDestroy() */
+} /* DestroyString() */
 
 bool StringReserve(String_t *This, size_t NewSize)
 { /* StringReserve() */
@@ -1001,7 +1001,7 @@ String_t *StringConcatCStr(String_t *This, const char *Src)
   RETURN(NewStr);
 
 Exit:
-  StringDelete(NewStr);
+  DeleteString(NewStr);
   errno = ErrNo;
   
 Return:
@@ -1072,7 +1072,7 @@ String_t *StringConcatStr(String_t *This, const String_t *Src)
   RETURN(NewStr);
 
 Exit:
-  StringDelete(NewStr);
+  DeleteString(NewStr);
   errno = ErrNo;
   
 Return:

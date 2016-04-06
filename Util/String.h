@@ -57,7 +57,7 @@ typedef struct String String_t;
 
 /******************************************************************************
  * These would be 'public' member functions in C++.  All
- * 'StringConstructX()' functions return 'true' on success.  On
+ * 'ConstructStringX()' functions return 'true' on success.  On
  * failure they call 'StringDesstroy(This), set 'errno', and return
  * 'false'.  All 'NewStringX()' functions return a pointer to a newly
  * created and initialized 'struct String' on success.  On failure
@@ -69,8 +69,8 @@ typedef struct String String_t;
  *****************************************************************************/
 /* Default constructor.  We pre-allocate an eight 'char' buffer (seven
  * characters plus the terminating '\0'). */
-static inline bool StringConstruct(String_t *This)
-{ /* StringConstruct() */
+static inline bool ConstructString(String_t *This)
+{ /* ConstructString() */
 #ifndef NDEBUG
   if (This == NULL)
   { /* Error. */
@@ -86,31 +86,31 @@ static inline bool StringConstruct(String_t *This)
   This->Size = 0;
 
   return true;
-} /* StringConstruct() */
+} /* ConstructString() */
 extern String_t *NewString();
 
 /* Copy construstor. */
-extern bool StringConstructStr(String_t *This, const String_t *Src);
+extern bool ConstructStringStr(String_t *This, const String_t *Src);
 extern String_t *NewStringStr(const String_t *Src);
 
 /* Construct a 'String_t' from a 'const char *'. */
-extern bool StringConstructCStr(String_t *This, const char *Src);
+extern bool ConstructStringCStr(String_t *This, const char *Src);
 extern String_t *NewStringCStr(const char *Src);
 
 /* Construct a 'String_t' containing 'Count' repetitions of 'Char'. */
-extern bool StringConstructChar(String_t *This, char Char, size_t Count);
+extern bool ConstructStringChar(String_t *This, char Char, size_t Count);
 extern String_t *NewStringChar(char Char, size_t Count);
 
 /* Destructor. */
-extern void StringDestroy(String_t *This);
-static inline void StringDelete(String_t *This)
-{ /* StringDelete() */
+extern void DestroyString(String_t *This);
+static inline void DeleteString(String_t *This)
+{ /* DeleteString() */
   if (This != NULL)
   { /* Exists. */
-    StringDestroy(This);
+    DestroyString(This);
     free(This);
   } /* Exists. */
-} /* StringDelete() */
+} /* DeleteString() */
 
 /* Make buffer at least 'MinSize' characters long. */
 extern bool StringReserve(String_t *This, size_t MinSize);

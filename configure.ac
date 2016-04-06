@@ -31,7 +31,7 @@ m4_define([Util_lt_revision], [Util_interface_revision])
 # Start main autoconf stuff.
 AC_INIT(Util, Util_version, lcbpublic@gmail.com, Util)
 AC_CONFIG_SRCDIR([Util/strtoc.c])
-#AC_CONFIG_MACRO_DIRS([m4])
+AC_CONFIG_MACRO_DIRS([m4])
 AM_INIT_AUTOMAKE
 AC_LANG([C])
 
@@ -44,7 +44,7 @@ AC_PROG_AWK
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
-AC_PROG_RANLIB
+#AC_PROG_RANLIB
 AC_PROG_LIBTOOL
 AC_ISC_POSIX
 PKG_PROG_PKG_CONFIG
@@ -95,20 +95,20 @@ AC_SUBST([LT_REVISION])
 # Libtool initialization.
 AC_LIBTOOL_DLOPEN
 AC_LIBTOOL_WIN32_DLL
-AC_PROG_LIBTOOL
+#AC_PROG_LIBTOOL
 #AM_PROG_LIBTOOL
 AC_SUBST([LIBTOOL_DEPS])
 LT_INIT
 
-if ./libtool --features | grep '^enable static libraries$' > /dev/null 2>&1; then
-  STATIC=-static
-else
-  STATIC=
-fi
-AC_SUBST([STATIC])
+#if ./libtool --features | grep '^enable static libraries$' > /dev/null 2>&1; then
+#  STATIC=-static
+#else
+#  STATIC=
+#fi
+#AC_SUBST([STATIC])
 
-AM_CONDITIONAL([BINARY_HELLDL],
-    [grep '^global_symbol_pipe=..*$' ./libtool >/dev/null])
+#AM_CONDITIONAL([BINARY_HELLDL],
+#    [grep '^global_symbol_pipe=..*$' ./libtool >/dev/null])
 
 # Checks for packages.
 #PKG_CHECK_MODULES([gtk], [gtk_pkg >= gtk_required_version])

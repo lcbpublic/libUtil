@@ -1,62 +1,174 @@
 -*- mode: outline; -*-
 
-* Overall Operation
-** Main Program
-Creates Trader passing it 'argc' and 'argv'.
+* The 'libUtil' utility library
 
-** Trader
-Creates one or more Strategies to trade one or more Markets via one or
-more Accounts.
+A C library of miscellaneous utilities.  That is, stuff. :)
 
-** Strategy
-Decides when to place orders by examining past data from one or more
-Markets.  Each Strategy has exactly one account and or more markets.
+Author: Leland Best <lcbpublic@gmail.com>
 
-** Account
-Maintains running account balance and other stats about actual trades
-executed.  Also serves as the interface between a Strategy and one or
-more Markets.
+License: GNU GPL v3 or later.  See the file 'COPYING.txt' in this directory.
 
-? This class can serve as base class for cases where the Trader and/or
-Strategy need additional/different stats. ?
+** Introduction
 
-** Market
-Fetches market data sequentially from a (single) market database and
-executes pending Orders against it.  Executed Orders are applied to
-their corresponding Accounts.  Bar and open data are passed to
-... who?  Strategy?  Trader?
+This is a library of ... well ... stuff.  It's all stuff I find myself
+rewriting, one way or another, whenever I sit down to write a C
+program.  (Ultimately, there will be a C++ version but, one thing at a
+time.)  It is licensed under the GPL (see the file 'COPYING.txt' in
+this directory).  Currently this 'README.md' (plus comments in the
+code and, of course, the code itself) is all the documentation there
+is.
+
+Since I'm writing this solely with my own use in mind it probably only
+builds "out of the box" on GNU/Linux systems with reasonably recent
+versions of 'gcc'.  Personally, I only build and test on Debian
+'stable' and 'testing' whatever those happen to be at the time
+(currently 'jessie' and 'stretch').  I have neither the time, the
+resources, nor the motivation (I _did_ mention I'm writing this for my
+_own_ use didn't I? :^> ) to worry about anything else.  However,
+should somebody be sufficiently motivated, I would _guess_ that it
+wouldn't be hard to port to other GNU/Linux systems/distributions.
+Maybe even other *nix systems and/or compilers.  Windows?  _Maybe_
+Cygwin but who knows?  Beyond that, you are _so_ on your own!
+
+Thus far (which isn't very far at all) I'm planning to have four main areas of
+functionality:
+
+  1. String conversions (mostly to numeric types).
+
+  2. A dynamic string "class" ('struct String' aka 'String_t').
+
+  3. Error handling.
+
+  4. Command-line argument parsing.
+
+At this point, only the first is really code complete and had any
+testing at all.  The second has the basics for 'String_t' but it needs
+a _lot_ more functionality and testing.  And I'm not even certain I'll
+keep the present interface (see below).  Number three currently
+consists of a couple macros and a lot of ideas but that's it.  Number
+4 consists entirely of thoughts about the shortcomings of existing
+libraries/packages and ideas about how to fix them, but that's it.
+
+The rest of this document first briefly addresses the build system,
+then documents the existing code and the rationale behind it, and
+discusses my thoughts and ideas for stuff that still needs to be
+developed.
+
+** Building
+
+** String Conversions
+
+** Dynamic C Strings
+
+** Error Handling
+Some notes on error handling.
+
+First, our objective: We want to provide a reusable "framework" for
+handling (run-time) errors.  That is, we want to define functions,
+structs, macros, <whatever> that, ideally, make writing error
+handling code less repetitive and more reliable.  However, before
+we can even begin this task we need to define what we mean by an
+"error".
+
+It is tempting to offer up some platitude such as this excerpt from
+http://en.cppreference.com/w/cpp/language/exceptions:
+
+"... 'errors' are typically limited to only the following:
+
+1. Failures to meet the postconditions, such as failing to
+produce a valid return value object
+
+2. Failures to meet the preconditions of another function that
+must be called (for non-private member functions)
+
+3. Failures to (re)establish a class invariant"
+
+Sounds good, right?  Hmmm.
+
+Okay, let's consider 1 above.  Certainly one of the most obvious
+ways for this to happen is if 'malloc()' fails.  Ask almost any
+"garden variety" programmer whether failure of 'malloc()'
+(i.e. 'malloc()' returns 'NULL') is an error and they'll
+categorically say "Yes!".
+
+In one way this is correct.  That is, when a programmer calls
+'malloc()' he/she almost always _expects_ to receive a pointer to a
+chunk of memory.  Furthermore, if 'malloc()' fails the programmer
+may find it difficult to decide what to do about it.  In this
+sense, failure of 'malloc()' is almost always an error.
+
+On the other hand, there are certainly many cases when failure of
+'malloc()' should not (or even _must_ not) cause program
+termination (which, BTW, is the default behavior in C++).  Consider
+an interactive image processing/manipulation program (i.e. The
+Gimp).  Now suppose a naive user asks it to create a
+2,000,000x2,000,000 image (that's 4x10^12 pixels).  On almost any
+modern day (2016) computer, attempting to 'malloc()' that much
+space will fail.  But with a GUI interface this can, at some level,
+be handled by asking the user to choose a smaller image size.  In
+this sense, failure of 'malloc()' is no more an error than any of
+thousands (millions?) of other possible conditions.  Then again, if
+the same program can also be run non-interactively (i.e. in
+"batch" mode) then, since we cannot ask the user for a different
+image size, the exact same error may be fatal.
+
+Aside from recoverability, there can also be other significant
+differences between these two cases.  In the interactive case there
+is no need to output detailed information about where and why the
+error occurred (i.e. debug info).  In fact, such output would
+probably just confuse the user.  On the other hand, in batch mode
+it may well be useful to output such info so the writer of the
+script (or whatever) can track down what went wrong.  But wait!
+Suppose the program is called from a script that is "smart" enough
+to be able to try a smaller image size?  Now we're back to a state
+where the debug info will just be a nuisance!  So, at the very
+least, what constitutes an "error" is application (program)
+dependent, and possibly even context dependent.
+
+The problem of determining what constitues an error and/or what to
+do about it becomes even more unclear in the case where we are
+developing a library.  In the case of an application program we can
+hope that in situations like the ones outlined above some form of
+"user" input may tell us how to handle such "errors".  In a library
+we have no clue what our application and/or context may be.
+Indeed, one sign of a "good" library is that it winds up being used
+(successfully :) ) in ways the original author never imagined.
+
+The bottom line here seems to be two-fold:
+
+1. We can not hope to write an error handling library/package that
+determines what is an error or how to handle one when it occurs.
+
+2. We _can_ hope to more-or-less encapsulate tasks frequently
+required when handling errors (e.g.
 
 
-* Simulated Trading Classes
-Sadly, it probably makes sense to have both Daily and Intraday
-versions of all classes except BerkeleyDb.  The problem is that the
-duration of a daily bar is not constant (i.e. full days vs. half days,
-etc.) while intraday bars _are_ always the same length.  Therefore
-each daily bar is only associated with a date and has a variable
-duration, while an intraday bar is associated with a date-time and has
-a fixed duration.  This makes handling "time" for daily bars
-significantly different from intraday bars.
-
-** BerkeleyDb
-A simpler wrapper around the Berkely DB C++ classes.  This one already
-exists (see BerkelyDb.{hpp,cpp}).
-
-** DailyData, IntradayData
-Extend BerkelyDb to access daily/intraday data.  Data items/records
-represent individual bars. These exist (see DailyData and
-IntradayData).
-
-** DailyMarket, IntradayMarket
-Uses market data to simulate trades.  Maintains lists/queues of open
-orders and executes them against the market data.  Includes "tick"
-size and market related trading "costs" (non-ideal order execution,
-etc.).  Allows placing and canceling of orders.  Executed/cancelled
-orders are returned to the corresponding Account.  Market data is
-passed to ... where?
 
 
-** BaseAccount?
 
-** BaseDailyTrader, BaseIntradayTrader
-Base class for epresenting trading algorithms.  Interacts with one (or
-more?) Markets.
+If the function completes successfully two things must happen:
+
+1) Any local/temporary resources must be released (e.g. files may
+need to be closed, memory free()'ed, mutexes unlocked, etc.).
+ *
+2) The function must return it's intended value.
+ *
+On the other hand, in the event of a error, three things must happen:
+ *
+1) The error must be reported.  This may take many forms from simply setting/returning an error code, to loging/recording detailed debugging info about what happened, to trying to continuing
+ *
+Searching Google for some kind of consensus reveals, basicaly, that
+there is none. :( At least, nothing beyond being consistent within
+a library.
+
+A number of posts described/provided macro packages
+that, at their core, use 'setjmp()'/'longjmp()' to try to mimic C++
+"exceptions".  While I admit that I think C++ "exceptions" are evil
+to begin with (I know: Heresy!) the 'stjmp()'/'longjmp()' macros
+seem particularly nasty since C has no concept of "real" "stack
+unwinding" inasmuch as there are no destructors to automatically
+clean up objects allocated on the stack.  Therefore, one small
+slip-up can lead to a whole slew of orphaned/leaked stuff floating
+around.  As a result, I hereby reject any such solutions out-of-hand.
+
+** Command-line Arguments
