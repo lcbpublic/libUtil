@@ -4,7 +4,7 @@ add_library(Util SHARED
   Util.h
 
 
-  StrTo.h
+  StrToX.h
   strtochar.c strtoschar.c strtouchar.c
   
   strtosc.c strtouc.c strtos.c strtous.c strtoi.c strtoui.c
@@ -45,6 +45,6 @@ target_compile_options(Util PUBLIC -Wall)
 # Set up the install stuff.
 install(TARGETS Util LIBRARY DESTINATION lib)
 install(FILES
-  Util.h Errors.h StrTo.h String.h
+  Util.h Errors.h StrToX.h String.h
   DESTINATION include
 )

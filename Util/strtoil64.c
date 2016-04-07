@@ -2,7 +2,7 @@
 #include <limits.h>
 #include <stdint.h>
 
-#include "StrTo.h"
+#include "StrToX.h"
 
 /******************************************************************************
  * Function equivalent to strtoll() but for int_least64_t.  See

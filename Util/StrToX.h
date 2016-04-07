@@ -1,5 +1,5 @@
-#ifndef StrTo_h
-#define StrTo_h
+#ifndef StrToX_h
+#define StrToX_h
 
 #ifdef __cplusplus
 extern "C" {

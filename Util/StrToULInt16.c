@@ -2,7 +2,7 @@
 #include <limits.h>
 #include <ctype.h>
 
-#include "StrTo.h"
+#include "StrToX.h"
 
 /******************************************************************************
  * Equivalent to strtouil16() but with simplified error reporting.

@@ -5,7 +5,7 @@
  * This file just '#include's all the separate .h files.
  *****************************************************************************/
 #include <Errors.h>
-#include <StrTo.h>
+#include <StrToX.h>
 #include <String.h>
 
 #endif

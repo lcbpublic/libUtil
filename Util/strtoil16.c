@@ -2,7 +2,7 @@
 #include <limits.h>
 #include <stdint.h>
 
-#include "StrTo.h"
+#include "StrToX.h"
 
 /******************************************************************************
  * Function equivalent to strtol() but for 'int_least16_t'.  See

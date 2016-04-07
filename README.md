@@ -98,13 +98,14 @@ friends for the additional types:
 
 The corresponding functions are:
 
-    strtoc(), strtochar(), strtosc(), strtoschar(), strtouc(),
-    strtouchar(), strtos(), strtous(), strtoi(), strtoui(), strtoi8(),
-    strtoui8(), strtoi16(), strtoui16(), strtoi32(), strtoui32(),
-    strtoi64(), strtoui64(), strtoif8(), strtouif8(), strtoif16(),
-    strtouif16(), strtoif32(), strtouif32(), strtoif64(),
-    strtouif64(), strtoif8(), strtouil8(), strtoil16(), strtouil16(),
-    strtoil32(), strtouil32(), strtoil64(), strtouil64()
+    strtochar(), strtoschar(), strtouchar(),
+
+    strtoc(), strtosc(), strtouc(), strtos(), strtous(), strtoi(),
+    strtoui(), strtoi8(), strtoui8(), strtoi16(), strtoui16(),
+    strtoi32(), strtoui32(), strtoi64(), strtoui64(), strtoif8(),
+    strtouif8(), strtoif16(), strtouif16(), strtoif32(), strtouif32(),
+    strtoif64(), strtouif64(), strtoif8(), strtouil8(), strtoil16(),
+    strtouil16(), strtoil32(), strtouil32(), strtoil64(), strtouil64()
 
 All of these except `strtochar()`, `strtoschar()`, and `strtouchar()`
 are based on one of the standard C library functions `strtol()`,
@@ -124,8 +125,16 @@ error semantics are a bit ... ummmm ... unintuitive.  For example,
 So, I wrote a set of functions that have more reasonable (to me) error
 handling.  They are:
 
-    StrToChar(), StrToEscChar(), StrToSChar(), StrToEscSChar(),
-    StrToUChar(), StrToEscUChar(), StrToShort(), StrToUShort(), ...
+    StrToChar(), StrToSChar(), StrToUChar(),
+
+    StrToC(), StrToSC(), StrToUC(), StrToS(), StrToUS(), StrToI(),
+    StrToUI(), StrToL(), StrToUL(), StrToLL(), StrToULL(),
+    StrToIMax(), StrToUMax(), StrToF(), StrToD(), StrToLD(),
+    StrToI8(), StrToUI8(), StrToI16(), StrToUI16(), StrToI32(),
+    StrToUI32(), StrToI64(), StrToUI64(), StrToIF8(), StrToUIF8(),
+    StrToIF16(), StrToUIF16(), StrToIF32(), StrToUIF32(), StrToIF64(),
+    StrToUIF64(), StrToIL8(), StrToUIL8(), StrToIL16(), StrToUIL16(),
+    StrToIL32(), StrToUIL32(), StrToIL64(), StrToUIL64()
 
 and so on.
 

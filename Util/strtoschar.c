@@ -2,7 +2,7 @@
 #include <limits.h>
 #include <ctype.h>
 
-#include "StrTo.h"
+#include "StrToX.h"
 
 /******************************************************************************
  * Function to convert the string 'Str' to a 'signed char'.  The

@@ -30,7 +30,8 @@ m4_define([Util_lt_revision], [Util_interface_revision])
 
 # Start main autoconf stuff.
 AC_INIT(Util, Util_version, lcbpublic@gmail.com, Util)
-AC_CONFIG_SRCDIR([Util/strtoc.c])
+AC_CONFIG_HEADERS(Util/config.h)
+AC_CONFIG_SRCDIR([Util/Util.h])
 AC_CONFIG_MACRO_DIRS([m4])
 AM_INIT_AUTOMAKE
 AC_LANG([C])
@@ -120,9 +121,13 @@ LT_INIT
 #AC_SUBST([LIBM])
 
 # Checks for library functions.
+AC_FUNC_STRERROR_R
 AC_FUNC_MKTIME
+AC_FUNC_MALLOC
+AC_FUNC_REALLOC
 AC_FUNC_STRTOD
-AC_CHECK_FUNCS([strtol strtoul strtoull strtoull strtof strtod strtold])
+AC_FUNC_STRTOLD
+AC_CHECK_FUNCS([strtol strtoul strtoull strtoull strtof])
 
 Util_LIBS=-lUtil
 AC_SUBST([Util_LIBS])
@@ -132,7 +137,7 @@ AC_CHECK_HEADERS([ctype.h])
 AC_CHECK_HEADERS([errno.h])
 AC_CHECK_HEADERS([limits.h])
 AC_CHECK_HEADERS([stdint.h])
-AC_CHECK_HEADERS([sys/stdlib.h])
+AC_CHECK_HEADERS([stdlib.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_HEADER_STDBOOL
