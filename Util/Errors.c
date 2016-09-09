@@ -1,32 +1,11 @@
-#ifndef Errors_h
-#define Errors_h
+/******************************************************************************
+ * Functions to simplify and standardize error handling.
+ *****************************************************************************/
+#include <errno.h>
+#include <locale.h>
+#include <string.h>
 
-/******************************************************************************
- * Stuff for handling errors.  For the moment, all we do is define a
- * few handy macros.  Ultimately, we'd like to have a full blown error
- * handling "class"es.
- *****************************************************************************/
-/******************************************************************************
- * This macro is pretty self explanatory.  We save the value 'val' in
- * the variable 'var' (actually, 'var' can be any valid 'lhs'), then
- * 'goto' the label 'label'.  NOTE: If 'val' is intended to be the
- * function return value, the programmer is responsible for making
- * sure 'var' actually gets returned at some point.
- *****************************************************************************/
-#define GOTO(var, val, label) (var) = (val); goto label
-
-/******************************************************************************
- * These two are specialized versions of 'GOTO' above.  The variable
- * which holds the return value is defined as '_RetVal'.  The macro
- * 'RETURN' assigns 'val' to '_RetVal' then jumps to label 'Return'.
- * 'EXIT' does the same but jumps to 'Exit'.  This allows "normal" and
- * "error" exits to do different things.
- *****************************************************************************/
-#ifndef RETVAL
-#define RETVAL _RetVal
-#endif
-#define RETURN(val) RETVAL = (val); goto Return
-#define EXIT(val) RETVAL = (val); goto Exit
+#include <Errors.h>
 
 /******************************************************************************
  * Get error message corresponding to a system 'errno' value.
@@ -58,6 +37,63 @@
  * returns an error message indicating that the (real) error message
  * could not be obtaind and why.
  *****************************************************************************/
-extern const char *StrError(int ErrNo);
+const char *StrError(int ErrNo)
+{ /* StrError() */
+  static const char *LocEInvalMsg =
+    "<No error message.  EINVAL getting locale.  Request for invalid locale data category, or invalid locale name.>";
+  static const char *LocENoEntMsg =
+    "<No error message.  ENOENT getting locale.  Locale not available.>";
+  static const char *LocENoMemMsg =
+    "<No error message.  ENOMEM getting locale.  Insufficient memory to create locale object.>";
+  static const char *LocUnknownMsg = "<No error message.  Unknown error getting locale.>";
+  static const char *NoMsgMsg = "<No error message.>";
+  const char *Msg, *_RetVal;
+  locale_t Locale;
+  int SavedErrNo, LocalErrNo;
 
-#endif
+  /* Try to get the current locale. */
+  SavedErrNo = errno;
+  Locale = newlocale(LC_MESSAGES_MASK, "", (locale_t) 0);
+  LocalErrNo = errno;
+  if (Locale == (locale_t) 0)
+  { /* Error. */
+    switch (LocalErrNo)
+    { /* Select error. */
+      case EINVAL:
+        Msg = LocEInvalMsg;
+        break;
+
+      case ENOENT:
+        Msg = LocENoEntMsg;
+        break;
+
+      case ENOMEM:
+        Msg = LocENoMemMsg;
+        break;
+
+      default:
+        Msg = LocUnknownMsg;
+        break;
+    } /* Select error. */
+
+    EXIT(Msg);
+  } /* Error. */
+
+  /* Get error message. */
+  errno = 0;
+  Msg = strerror_l(ErrNo, Locale);
+  LocalErrNo = errno;
+  if (Msg == NULL)
+  { /* Error. */
+    Msg = NoMsgMsg;
+  } /* Error. */
+
+  RETURN(Msg);
+  
+Exit:
+Return:
+  if (Locale != (locale_t) 0)
+    freelocale(Locale);
+  errno = SavedErrNo;
+  return _RetVal;
+} /* StrError() */

@@ -4,24 +4,24 @@ AC_PREREQ(2.67)
 
 # Some m4 definitions.
 # Library version.
-m4_define([Util_major_version],      [0])
-m4_define([Util_minor_version],      [0])
-m4_define([Util_micro_version],      [3])
-m4_define([Util_version],
-          [Util_major_version.Util_minor_version.Util_micro_version])
+m4_define([libUtil_major_version],      [0])
+m4_define([libUtil_minor_version],      [0])
+m4_define([libUtil_micro_version],      [3])
+m4_define([libUtil_version],
+          [libUtil_major_version.libUtil_minor_version.libUtil_micro_version])
 
-m4_define([Util_interface],          [0])
-m4_define([Util_interface_age],      [0])
-m4_define([Util_interface_revision], [3])
-#m4_define([Util_binary_age],    [0])
+m4_define([libUtil_interface],          [0])
+m4_define([libUtil_interface_age],      [0])
+m4_define([libUtil_interface_revision], [3])
+#m4_define([libUtil_binary_age],    [0])
 
 # libtool version related macros.  See
 # http://localhost/cgi-bin/dwww/usr/share/doc/libtool-doc/libtool.html?type=html#Versioning.
-m4_define([Util_lt_release],
-          [Util_major_version.Util_minor_version.Util_micro_version])
-m4_define([Util_lt_current], [Util_interface])
-m4_define([Util_lt_age], [Util_interface_age])
-m4_define([Util_lt_revision], [Util_interface_revision])
+m4_define([libUtil_lt_release],
+          [libUtil_major_version.libUtil_minor_version.libUtil_micro_version])
+m4_define([libUtil_lt_current], [libUtil_interface])
+m4_define([libUtil_lt_age], [libUtil_interface_age])
+m4_define([libUtil_lt_revision], [libUtil_interface_revision])
 
 ## Required package versions.
 ## Required gtkmm version.
@@ -29,7 +29,7 @@ m4_define([Util_lt_revision], [Util_interface_revision])
 #m4_define([gtk_required_version], [2.0.0])
 
 # Start main autoconf stuff.
-AC_INIT(Util, Util_version, lcbpublic@gmail.com, Util)
+AC_INIT(libUtil, libUtil_version, lcbpublic@gmail.com, libUtil)
 AC_CONFIG_HEADERS(Util/config.h)
 AC_CONFIG_SRCDIR([Util/Util.h])
 AC_CONFIG_MACRO_DIRS([m4])
@@ -50,21 +50,21 @@ AC_PROG_LIBTOOL
 AC_ISC_POSIX
 PKG_PROG_PKG_CONFIG
 
-# Util version
-UTIL_MAJOR_VERSION=Util_major_version
-UTIL_MINOR_VERSION=Util_minor_version
-UTIL_MICRO_VERSION=Util_micro_version
-UTIL_VERSION=Util_version
+# libUtil version
+UTIL_MAJOR_VERSION=libUtil_major_version
+UTIL_MINOR_VERSION=libUtil_minor_version
+UTIL_MICRO_VERSION=libUtil_micro_version
+UTIL_VERSION=libUtil_version
 
-UTIL_INTERFACE=Util_interface
-UTIL_INTERFACE_AGE=Util_interface_age
-UTIL_INTERFACE_REVISION=Util_interface_revision
-#UTIL_BINARY_AGE=Util_binary_age
+UTIL_INTERFACE=libUtil_interface
+UTIL_INTERFACE_AGE=libUtil_interface_age
+UTIL_INTERFACE_REVISION=libUtil_interface_revision
+#UTIL_BINARY_AGE=libUtil_binary_age
 
-# This is the X.Y used in -lUtil-FOO-X.Y
-#UTIL_API_MAJOR_VERSION=Util_api_major_version
-#UTIL_API_MINOR_VERSION=Util_api_minor_version
-#UTIL_API_VERSION=Util_api_version
+# This is the X.Y used in -llibUtil-FOO-X.Y
+#UTIL_API_MAJOR_VERSION=libUtil_api_major_version
+#UTIL_API_MINOR_VERSION=libUtil_api_minor_version
+#UTIL_API_VERSION=libUtil_api_version
 #API_MJ=$UTIL_API_MAJOR_VERSION
 #API_MI=$UTIL_API_MINOR_VERSION
 AC_SUBST([UTIL_MAJOR_VERSION])
@@ -82,11 +82,11 @@ AC_SUBST([UTIL_INTERFACE_REVISION])
 #AC_SUBST([API_MI])
 
 # libtool versioning
-LT_RELEASE=Util_lt_release
-LT_CURRENT=Util_lt_current
-LT_AGE=Util_lt_age
-LT_REVISION=Util_lt_revision
-#LT_CURRENT_MINUS_AGE=Util_lt_current_minus_age
+LT_RELEASE=libUtil_lt_release
+LT_CURRENT=libUtil_lt_current
+LT_AGE=libUtil_lt_age
+LT_REVISION=libUtil_lt_revision
+#LT_CURRENT_MINUS_AGE=libUtil_lt_current_minus_age
 AC_SUBST([LT_RELEASE])
 AC_SUBST([LT_CURRENT])
 AC_SUBST([LT_AGE])
@@ -128,6 +128,7 @@ AC_FUNC_REALLOC
 AC_FUNC_STRTOD
 AC_FUNC_STRTOLD
 AC_CHECK_FUNCS([strtol strtoul strtoull strtoull strtof])
+AC_CHECK_FUNCS([newlocale freelocale strerror_l])
 
 Util_LIBS=-lUtil
 AC_SUBST([Util_LIBS])
@@ -136,6 +137,7 @@ AC_SUBST([Util_LIBS])
 AC_CHECK_HEADERS([ctype.h])
 AC_CHECK_HEADERS([errno.h])
 AC_CHECK_HEADERS([limits.h])
+AC_CHECK_HEADERS([locale.h])
 AC_CHECK_HEADERS([stdint.h])
 AC_CHECK_HEADERS([stdlib.h])
 

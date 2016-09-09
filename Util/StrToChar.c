@@ -4,7 +4,7 @@
 #include "StrToX.h"
 
 /******************************************************************************
- * Equivalent to 'strtosc()' but with simplified error reporting.
+ * Equivalent to 'strtoc()' but with simplified error reporting.
  * Returns the 'errno' value rather than setting the global 'errno'.
  * The global 'errno' is always left unchanged.  It is an error not to
  * use all of 'Str', or for (*Str == '\0').  Returns ERANGE on
@@ -12,13 +12,13 @@
  * function returns non-zero then '*Val' is unchanged.  In all cases
  * neither 'Str' nor 'Val' may be NULL.
  *****************************************************************************/
-int StrToSChar(const char *Str, signed char *Val)
-{ /* StrToSChar(char *, char *) */
-  signed char NewVal;
-  char *End;
+int StrToChar(const char *Str, char *Val)
+{ /* StrToChar(char *, char *) */
+  char NewVal;
+  char *End = NULL;
   int SavedErrNo, ErrNo;
 
-  /* NULL pointer checking. */
+  /* NULL checking. */
   if (Str == NULL || Val == NULL)
   { /* Error. */
     return EFAULT;
@@ -36,7 +36,7 @@ int StrToSChar(const char *Str, signed char *Val)
 
   /* Do the conversion. */
   errno = 0;
-  NewVal = strtoschar(Str, &End);
+  NewVal = strtochar(Str, &End);
   ErrNo = errno;
 
   /* Check for errors. */
@@ -53,4 +53,4 @@ int StrToSChar(const char *Str, signed char *Val)
   /* Restore global 'errno' and return 'ErrNo'. */
   errno = SavedErrNo;
   return ErrNo;
-} /* StrToSChar(char *, signed char *) */
+} /* StrToChar(char *, char *) */

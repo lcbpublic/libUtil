@@ -161,12 +161,12 @@ extern bool StringAppendStr(String_t *This, const String_t *Str);
 /* Append a 'const char *' to 'This' returning the result in a new
  * 'String_t'.  Returns NULL and sets 'errno' on error. */
 extern String_t *
-StringConcatCStr(String_t *This, const char *Str);
+StringConcatCStr(String_t *Str, const char *CStr);
 
 /* Append a 'String_t *' to 'This' returning the result in a new
  * 'String_t'.  Returns NULL and sets 'errno' on error. */
 extern String_t *
-StringConcatStr(String_t *This, const String_t *Str);
+StringConcatStr(String_t *Str0, const String_t *Str1);
 
 /* Analogous to sprintf(). */
 extern int StringPrintf(String_t *This, const char *Fmt, ...);

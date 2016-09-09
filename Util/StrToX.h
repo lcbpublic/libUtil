@@ -129,59 +129,61 @@ extern "C" {
    * functions do _not_ understand the '\unnnn' and '\Unnnn' escape
    * sequences since these can translate to a multi-char sequence and
    * we only return a single character.  */
-  extern int StrToEscChar(const char *Str, char *Val);
-  extern int StrToEscSChar(const char *Str, signed char *Val);
-  extern int StrToEscUChar(const char *Str, unsigned char *Val);
+  extern int StrToChar(const char *Str, char *Val);
+  extern int StrToSChar(const char *Str, signed char *Val);
+  extern int StrToUChar(const char *Str, unsigned char *Val);
 
   /* These are all numeric.  WARNING: Make sure you really know what
    * you're doing before using 'StrToChar()'.  Since 'char' may be
    * either signed or unsigned, it may behave like either
    * 'StrToSChar()' or 'StrToUChar()' depending. */
-  static inline int StrToChar(const char *Str, int Base, char *Val);
-  extern int StrToSChar(const char *Str, int Base, signed char *Val);
-  extern int StrToUChar(const char *Str, int Base, unsigned char *Val);
-  extern int StrToShort(const char *Str, int Base, short *Val);
-  extern int StrToUShort(const char *Str, int Base, unsigned short *Val);
-  extern int StrToInt(const char *Str, int Base, int *Val);
-  extern int StrToUInt(const char *Str, int Base, unsigned int *Val);
-  extern int StrToLong(const char *Str, int Base, long *Val);
-  extern int StrToULong(const char *Str, int Base, unsigned long *Val);
-  extern int StrToLongLong(const char *Str, int Base, long long *Val);
-  extern int StrToULongLong(const char *Str, int Base, unsigned long long *Val);
+  static inline int StrToC(const char *Str, int Base, char *Val);
+  extern int StrToSC(const char *Str, int Base, signed char *Val);
+  extern int StrToUC(const char *Str, int Base, unsigned char *Val);
+  extern int StrToS(const char *Str, int Base, short *Val);
+  extern int StrToUS(const char *Str, int Base, unsigned short *Val);
+  extern int StrToI(const char *Str, int Base, int *Val);
+  extern int StrToUI(const char *Str, int Base, unsigned int *Val);
+  extern int StrToL(const char *Str, int Base, long *Val);
+  extern int StrToUL(const char *Str, int Base, unsigned long *Val);
+  extern int StrToLL(const char *Str, int Base, long long *Val);
+  extern int StrToULL(const char *Str, int Base, unsigned long long *Val);
 
-  extern int StrToFloat(const char *Str, float *Val);
-  extern int StrToDouble(const char *Str, double *Val);
-  extern int StrToLongDouble(const char *Str, long double *Val);
+  extern int StrToF(const char *Str, float *Val);
+  extern int StrToD(const char *Str, double *Val);
+  extern int StrToLD(const char *Str, long double *Val);
 
   /* Conversions for types defined in stdint.h.  WARNING: These should
    * work on platforms where a 'long' is at least 32 bits and a 'long
    * long' is at least 64 bits.  All bets are off for other cases */
-  extern int StrToInt8(const char *Str, int Base, int8_t *Val);
-  extern int StrToUInt8(const char *Str, int Base, uint8_t *Val);
-  extern int StrToInt16(const char *Str, int Base, int16_t *Val);
-  extern int StrToUInt16(const char *Str, int Base, uint16_t *Val);
-  extern int StrToInt32(const char *Str, int Base, int32_t *Val);
-  extern int StrToUInt32(const char *Str, int Base, uint32_t *Val);
-  extern int StrToInt64(const char *Str, int Base, int64_t *Val);
-  extern int StrToUInt64(const char *Str, int Base, uint64_t *Val);
+  extern int StrToI8(const char *Str, int Base, int8_t *Val);
+  extern int StrToUI8(const char *Str, int Base, uint8_t *Val);
+  extern int StrToI16(const char *Str, int Base, int16_t *Val);
+  extern int StrToUI16(const char *Str, int Base, uint16_t *Val);
+  extern int StrToI32(const char *Str, int Base, int32_t *Val);
+  extern int StrToUI32(const char *Str, int Base, uint32_t *Val);
+  extern int StrToI64(const char *Str, int Base, int64_t *Val);
+  extern int StrToUI64(const char *Str, int Base, uint64_t *Val);
+  extern int StrToIMax(const char *Str, int Base, intmax_t *Val);
+  extern int StrToUMax(const char *Str, int Base, uintmax_t *Val);
 
-  extern int StrToLInt8(const char *Str, int Base, int_least8_t *Val);
-  extern int StrToULInt8(const char *Str, int Base, uint_least8_t *Val);
-  extern int StrToLInt16(const char *Str, int Base, int_least16_t *Val);
-  extern int StrToULInt16(const char *Str, int Base, uint_least16_t *Val);
-  extern int StrToLInt32(const char *Str, int Base, int_least32_t *Val);
-  extern int StrToULInt32(const char *Str, int Base, uint_least32_t *Val);
-  extern int StrToLInt64(const char *Str, int Base, int_least64_t *Val);
-  extern int StrToULInt64(const char *Str, int Base, uint_least64_t *Val);
+  extern int StrToIL8(const char *Str, int Base, int_least8_t *Val);
+  extern int StrToUIL8(const char *Str, int Base, uint_least8_t *Val);
+  extern int StrToIL16(const char *Str, int Base, int_least16_t *Val);
+  extern int StrToUIL16(const char *Str, int Base, uint_least16_t *Val);
+  extern int StrToIL32(const char *Str, int Base, int_least32_t *Val);
+  extern int StrToUIL32(const char *Str, int Base, uint_least32_t *Val);
+  extern int StrToIL64(const char *Str, int Base, int_least64_t *Val);
+  extern int StrToUIL64(const char *Str, int Base, uint_least64_t *Val);
 
-  extern int StrToFInt8(const char *Str, int Base, int_fast8_t *Val);
-  extern int StrToUFInt8(const char *Str, int Base, uint_fast8_t *Val);
-  extern int StrToFInt16(const char *Str, int Base, int_fast16_t *Val);
-  extern int StrToUFInt16(const char *Str, int Base, uint_fast16_t *Val);
-  extern int StrToFInt32(const char *Str, int Base, int_fast32_t *Val);
-  extern int StrToUFInt32(const char *Str, int Base, uint_fast32_t *Val);
-  extern int StrToFInt64(const char *Str, int Base, int_fast64_t *Val);
-  extern int StrToUFInt64(const char *Str, int Base, uint_fast64_t *Val);
+  extern int StrToIF8(const char *Str, int Base, int_fast8_t *Val);
+  extern int StrToUIF8(const char *Str, int Base, uint_fast8_t *Val);
+  extern int StrToIF16(const char *Str, int Base, int_fast16_t *Val);
+  extern int StrToUIF16(const char *Str, int Base, uint_fast16_t *Val);
+  extern int StrToIF32(const char *Str, int Base, int_fast32_t *Val);
+  extern int StrToUIF32(const char *Str, int Base, uint_fast32_t *Val);
+  extern int StrToIF64(const char *Str, int Base, int_fast64_t *Val);
+  extern int StrToUIF64(const char *Str, int Base, uint_fast64_t *Val);
 
 /******************************************************************************
  * Inline method definitions.
@@ -197,16 +199,16 @@ extern "C" {
 #endif
   } /* strtoc() */
 
-  static inline int StrToChar(const char *Str, int Base, char *Val)
-  { /* StrToChar() */
+  static inline int StrToC(const char *Str, int Base, char *Val)
+  { /* StrToC() */
 #if CHAR_MIN == SCHAR_MIN && CHAR_MAX == SCHAR_MAX
-    return StrToSChar(Str, Base, (signed char *) Val);
+    return StrToSC(Str, Base, (signed char *) Val);
 #elif CHAR_MIN == UCHAR_MIN && CHAR_MAX == UCHAR_MAX
-    return StrToUChar(Str, Base, (unsigned char *) Val);
+    return StrToUC(Str, Base, (unsigned char *) Val);
 #else
 #error "Can not implement StrToChar()."
 #endif
-  } /* strtoc() */
+  } /*StrToC() */
 
 #ifdef __cplusplus
 } /* extern "C" */

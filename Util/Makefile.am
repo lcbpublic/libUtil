@@ -16,19 +16,18 @@ libUtil_la_SOURCES = strtochar.c strtoschar.c strtouchar.c \
 	strtoil64.c strtouil64.c strtoif8.c strtouif8.c \
 	strtoif16.c strtouif16.c strtoif32.c strtouif32.c \
 	strtoif64.c strtouif64.c \
-	StrToEscChar.c StrToEscSChar.c StrToEscUChar.c \
-	StrToSChar.c StrToUChar.c StrToShort.c StrToUShort.c \
-	StrToInt.c StrToUInt.c StrToLong.c StrToULong.c \
-	StrToLongLong.c StrToULongLong.c \
-	StrToFloat.c StrToDouble.c StrToLongDouble.c \
-	StrToInt8.c StrToUInt8.c StrToInt16.c StrToUInt16.c \
-	StrToInt32.c StrToUInt32.c StrToInt64.c StrToUInt64.c \
-	StrToLInt8.c StrToULInt8.c StrToLInt16.c StrToULInt16.c \
-	StrToLInt32.c StrToULInt32.c StrToLInt64.c StrToULInt64.c \
-	StrToFInt8.c StrToUFInt8.c StrToFInt16.c StrToUFInt16.c \
-	StrToFInt32.c StrToUFInt32.c StrToFInt64.c StrToUFInt64.c \
 	\
-	String.c
+	StrToChar.c StrToSChar.c StrToUChar.c \
+	StrToSC.c StrToUC.c StrToS.c StrToUS.c StrToI.c StrToUI.c \
+	StrToL.c StrToUL.c StrToLL.c StrToULL.c StrToF.c StrToD.c StrToLD.c \
+	StrToI8.c StrToUI8.c StrToI16.c StrToUI16.c \
+	StrToI32.c StrToUI32.c StrToI64.c StrToUI64.c StrToIMax.c StrToUMax.c \
+	StrToIL8.c StrToUIL8.c StrToIL16.c StrToUIL16.c \
+	StrToIL32.c StrToUIL32.c StrToIL64.c StrToUIL64.c \
+	StrToIF8.c StrToUIF8.c StrToIF16.c StrToUIF16.c \
+	StrToIF32.c StrToUIF32.c StrToIF64.c StrToUIF64.c \
+	\
+	String.c Errors.c
 
 libUtil_la_CFLAGS = $(AM_CFLAGS)
 #libUtil_la_CXXFLAGS = $(AM_CXXFLAGS)

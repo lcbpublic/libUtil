@@ -15,29 +15,27 @@ add_library(Util SHARED
   strtoil32.c strtouil32.c strtoif32.c strtouif32.c strtoi64.c
   strtoui64.c strtoil64.c strtouil64.c strtoif64.c strtouif64.c
 
-  StrToEscChar.c StrToEscSChar.c StrToEscUChar.c
+  StrToChar.c StrToSChar.c StrToUChar.c
   
-  StrToSChar.c StrToUChar.c StrToShort.c StrToUShort.c
-  StrToInt.c StrToUInt.c StrToLong.c StrToULong.c
-  StrToLongLong.c StrToULongLong.c
-  StrToFloat.c StrToDouble.c StrToLongDouble.c
+  StrToSC.c StrToUC.c StrToS.c StrToUS.c
+  StrToI.c StrToUI.c StrToL.c StrToUL.c
+  StrToLL.c StrToULL.c StrToIMax.c StrToUMax.c
+  StrToF.c StrToD.c StrToLD.c
 
-  StrToInt8.c StrToUInt8.c StrToLInt8.c StrToULInt8.c
-  StrToFInt8.c StrToUFInt8.c
-  StrToInt16.c StrToUInt16.c StrToLInt16.c StrToULInt16.c
-  StrToFInt16.c StrToUFInt16.c
-  StrToInt32.c StrToUInt32.c StrToLInt32.c StrToULInt32.c
-  StrToFInt32.c StrToUFInt32.c
-  StrToInt64.c StrToUInt64.c StrToLInt64.c StrToULInt64.c
-  StrToFInt64.c StrToUFInt64.c
-
+  StrToI8.c StrToUI8.c StrToIL8.c StrToUIL8.c
+  StrToIF8.c StrToUIF8.c
+  StrToI16.c StrToUI16.c StrToIL16.c StrToUIL16.c
+  StrToIF16.c StrToUIF16.c
+  StrToI32.c StrToUI32.c StrToIL32.c StrToUIL32.c
+  StrToIF32.c StrToUIF32.c
+  StrToI64.c StrToUI64.c StrToIL64.c StrToUIL64.c
+  StrToIF64.c StrToUIF64.c
 
   String.h String.c
 
-
-  Errors.h
+  Errors.h Errors.c
 )
-set_target_properties(Util PROPERTIES VERSION 0.0.0 SONAME 0.0.0)
+set_target_properties(Util PROPERTIES VERSION 0.0.3 SONAME 0.0.3)
 
 # Add global compile options.
 target_compile_options(Util PUBLIC -Wall)

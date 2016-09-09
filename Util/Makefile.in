@@ -152,27 +152,28 @@ am_libUtil_la_OBJECTS = libUtil_la-strtochar.lo \
 	libUtil_la-strtoif16.lo libUtil_la-strtouif16.lo \
 	libUtil_la-strtoif32.lo libUtil_la-strtouif32.lo \
 	libUtil_la-strtoif64.lo libUtil_la-strtouif64.lo \
-	libUtil_la-StrToEscChar.lo libUtil_la-StrToEscSChar.lo \
-	libUtil_la-StrToEscUChar.lo libUtil_la-StrToSChar.lo \
-	libUtil_la-StrToUChar.lo libUtil_la-StrToShort.lo \
-	libUtil_la-StrToUShort.lo libUtil_la-StrToInt.lo \
-	libUtil_la-StrToUInt.lo libUtil_la-StrToLong.lo \
-	libUtil_la-StrToULong.lo libUtil_la-StrToLongLong.lo \
-	libUtil_la-StrToULongLong.lo libUtil_la-StrToFloat.lo \
-	libUtil_la-StrToDouble.lo libUtil_la-StrToLongDouble.lo \
-	libUtil_la-StrToInt8.lo libUtil_la-StrToUInt8.lo \
-	libUtil_la-StrToInt16.lo libUtil_la-StrToUInt16.lo \
-	libUtil_la-StrToInt32.lo libUtil_la-StrToUInt32.lo \
-	libUtil_la-StrToInt64.lo libUtil_la-StrToUInt64.lo \
-	libUtil_la-StrToLInt8.lo libUtil_la-StrToULInt8.lo \
-	libUtil_la-StrToLInt16.lo libUtil_la-StrToULInt16.lo \
-	libUtil_la-StrToLInt32.lo libUtil_la-StrToULInt32.lo \
-	libUtil_la-StrToLInt64.lo libUtil_la-StrToULInt64.lo \
-	libUtil_la-StrToFInt8.lo libUtil_la-StrToUFInt8.lo \
-	libUtil_la-StrToFInt16.lo libUtil_la-StrToUFInt16.lo \
-	libUtil_la-StrToFInt32.lo libUtil_la-StrToUFInt32.lo \
-	libUtil_la-StrToFInt64.lo libUtil_la-StrToUFInt64.lo \
-	libUtil_la-String.lo
+	libUtil_la-StrToChar.lo libUtil_la-StrToSChar.lo \
+	libUtil_la-StrToUChar.lo libUtil_la-StrToSC.lo \
+	libUtil_la-StrToUC.lo libUtil_la-StrToS.lo \
+	libUtil_la-StrToUS.lo libUtil_la-StrToI.lo \
+	libUtil_la-StrToUI.lo libUtil_la-StrToL.lo \
+	libUtil_la-StrToUL.lo libUtil_la-StrToLL.lo \
+	libUtil_la-StrToULL.lo libUtil_la-StrToF.lo \
+	libUtil_la-StrToD.lo libUtil_la-StrToLD.lo \
+	libUtil_la-StrToI8.lo libUtil_la-StrToUI8.lo \
+	libUtil_la-StrToI16.lo libUtil_la-StrToUI16.lo \
+	libUtil_la-StrToI32.lo libUtil_la-StrToUI32.lo \
+	libUtil_la-StrToI64.lo libUtil_la-StrToUI64.lo \
+	libUtil_la-StrToIMax.lo libUtil_la-StrToUMax.lo \
+	libUtil_la-StrToIL8.lo libUtil_la-StrToUIL8.lo \
+	libUtil_la-StrToIL16.lo libUtil_la-StrToUIL16.lo \
+	libUtil_la-StrToIL32.lo libUtil_la-StrToUIL32.lo \
+	libUtil_la-StrToIL64.lo libUtil_la-StrToUIL64.lo \
+	libUtil_la-StrToIF8.lo libUtil_la-StrToUIF8.lo \
+	libUtil_la-StrToIF16.lo libUtil_la-StrToUIF16.lo \
+	libUtil_la-StrToIF32.lo libUtil_la-StrToUIF32.lo \
+	libUtil_la-StrToIF64.lo libUtil_la-StrToUIF64.lo \
+	libUtil_la-String.lo libUtil_la-Errors.lo
 libUtil_la_OBJECTS = $(am_libUtil_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -395,19 +396,18 @@ libUtil_la_SOURCES = strtochar.c strtoschar.c strtouchar.c \
 	strtoil64.c strtouil64.c strtoif8.c strtouif8.c \
 	strtoif16.c strtouif16.c strtoif32.c strtouif32.c \
 	strtoif64.c strtouif64.c \
-	StrToEscChar.c StrToEscSChar.c StrToEscUChar.c \
-	StrToSChar.c StrToUChar.c StrToShort.c StrToUShort.c \
-	StrToInt.c StrToUInt.c StrToLong.c StrToULong.c \
-	StrToLongLong.c StrToULongLong.c \
-	StrToFloat.c StrToDouble.c StrToLongDouble.c \
-	StrToInt8.c StrToUInt8.c StrToInt16.c StrToUInt16.c \
-	StrToInt32.c StrToUInt32.c StrToInt64.c StrToUInt64.c \
-	StrToLInt8.c StrToULInt8.c StrToLInt16.c StrToULInt16.c \
-	StrToLInt32.c StrToULInt32.c StrToLInt64.c StrToULInt64.c \
-	StrToFInt8.c StrToUFInt8.c StrToFInt16.c StrToUFInt16.c \
-	StrToFInt32.c StrToUFInt32.c StrToFInt64.c StrToUFInt64.c \
 	\
-	String.c
+	StrToChar.c StrToSChar.c StrToUChar.c \
+	StrToSC.c StrToUC.c StrToS.c StrToUS.c StrToI.c StrToUI.c \
+	StrToL.c StrToUL.c StrToLL.c StrToULL.c StrToF.c StrToD.c StrToLD.c \
+	StrToI8.c StrToUI8.c StrToI16.c StrToUI16.c \
+	StrToI32.c StrToUI32.c StrToI64.c StrToUI64.c StrToIMax.c StrToUMax.c \
+	StrToIL8.c StrToUIL8.c StrToIL16.c StrToUIL16.c \
+	StrToIL32.c StrToUIL32.c StrToIL64.c StrToUIL64.c \
+	StrToIF8.c StrToUIF8.c StrToIF16.c StrToUIF16.c \
+	StrToIF32.c StrToUIF32.c StrToIF64.c StrToUIF64.c \
+	\
+	String.c Errors.c
 
 libUtil_la_CFLAGS = $(AM_CFLAGS)
 #libUtil_la_CXXFLAGS = $(AM_CXXFLAGS)
@@ -508,46 +508,49 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToDouble.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToEscChar.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToEscSChar.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToEscUChar.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToFInt16.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToFInt32.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToFInt64.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToFInt8.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToFloat.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToInt.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToInt16.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToInt32.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToInt64.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToInt8.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToLInt16.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToLInt32.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToLInt64.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToLInt8.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToLong.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToLongDouble.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToLongLong.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-Errors.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToChar.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToD.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToF.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToI.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToI16.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToI32.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToI64.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToI8.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToIF16.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToIF32.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToIF64.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToIF8.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToIL16.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToIL32.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToIL64.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToIL8.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToIMax.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToL.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToLD.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToLL.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToS.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToSC.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToSChar.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToShort.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUC.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUChar.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUFInt16.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUFInt32.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUFInt64.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUFInt8.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUInt.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUInt16.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUInt32.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUInt64.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUInt8.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToULInt16.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToULInt32.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToULInt64.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToULInt8.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToULong.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToULongLong.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUShort.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUI.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUI16.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUI32.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUI64.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUI8.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUIF16.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUIF32.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUIF64.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUIF8.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUIL16.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUIL32.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUIL64.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUIL8.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUL.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToULL.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUMax.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-StrToUS.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-String.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-strtochar.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libUtil_la-strtoi.Plo@am__quote@
@@ -835,26 +838,12 @@ libUtil_la-strtouif64.lo: strtouif64.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-strtouif64.lo `test -f 'strtouif64.c' || echo '$(srcdir)/'`strtouif64.c
 
-libUtil_la-StrToEscChar.lo: StrToEscChar.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToEscChar.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToEscChar.Tpo -c -o libUtil_la-StrToEscChar.lo `test -f 'StrToEscChar.c' || echo '$(srcdir)/'`StrToEscChar.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToEscChar.Tpo $(DEPDIR)/libUtil_la-StrToEscChar.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToEscChar.c' object='libUtil_la-StrToEscChar.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToChar.lo: StrToChar.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToChar.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToChar.Tpo -c -o libUtil_la-StrToChar.lo `test -f 'StrToChar.c' || echo '$(srcdir)/'`StrToChar.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToChar.Tpo $(DEPDIR)/libUtil_la-StrToChar.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToChar.c' object='libUtil_la-StrToChar.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToEscChar.lo `test -f 'StrToEscChar.c' || echo '$(srcdir)/'`StrToEscChar.c
-
-libUtil_la-StrToEscSChar.lo: StrToEscSChar.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToEscSChar.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToEscSChar.Tpo -c -o libUtil_la-StrToEscSChar.lo `test -f 'StrToEscSChar.c' || echo '$(srcdir)/'`StrToEscSChar.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToEscSChar.Tpo $(DEPDIR)/libUtil_la-StrToEscSChar.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToEscSChar.c' object='libUtil_la-StrToEscSChar.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToEscSChar.lo `test -f 'StrToEscSChar.c' || echo '$(srcdir)/'`StrToEscSChar.c
-
-libUtil_la-StrToEscUChar.lo: StrToEscUChar.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToEscUChar.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToEscUChar.Tpo -c -o libUtil_la-StrToEscUChar.lo `test -f 'StrToEscUChar.c' || echo '$(srcdir)/'`StrToEscUChar.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToEscUChar.Tpo $(DEPDIR)/libUtil_la-StrToEscUChar.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToEscUChar.c' object='libUtil_la-StrToEscUChar.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToEscUChar.lo `test -f 'StrToEscUChar.c' || echo '$(srcdir)/'`StrToEscUChar.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToChar.lo `test -f 'StrToChar.c' || echo '$(srcdir)/'`StrToChar.c
 
 libUtil_la-StrToSChar.lo: StrToSChar.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToSChar.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToSChar.Tpo -c -o libUtil_la-StrToSChar.lo `test -f 'StrToSChar.c' || echo '$(srcdir)/'`StrToSChar.c
@@ -870,250 +859,278 @@ libUtil_la-StrToUChar.lo: StrToUChar.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUChar.lo `test -f 'StrToUChar.c' || echo '$(srcdir)/'`StrToUChar.c
 
-libUtil_la-StrToShort.lo: StrToShort.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToShort.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToShort.Tpo -c -o libUtil_la-StrToShort.lo `test -f 'StrToShort.c' || echo '$(srcdir)/'`StrToShort.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToShort.Tpo $(DEPDIR)/libUtil_la-StrToShort.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToShort.c' object='libUtil_la-StrToShort.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToSC.lo: StrToSC.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToSC.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToSC.Tpo -c -o libUtil_la-StrToSC.lo `test -f 'StrToSC.c' || echo '$(srcdir)/'`StrToSC.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToSC.Tpo $(DEPDIR)/libUtil_la-StrToSC.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToSC.c' object='libUtil_la-StrToSC.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToShort.lo `test -f 'StrToShort.c' || echo '$(srcdir)/'`StrToShort.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToSC.lo `test -f 'StrToSC.c' || echo '$(srcdir)/'`StrToSC.c
 
-libUtil_la-StrToUShort.lo: StrToUShort.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUShort.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUShort.Tpo -c -o libUtil_la-StrToUShort.lo `test -f 'StrToUShort.c' || echo '$(srcdir)/'`StrToUShort.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUShort.Tpo $(DEPDIR)/libUtil_la-StrToUShort.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUShort.c' object='libUtil_la-StrToUShort.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToUC.lo: StrToUC.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUC.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUC.Tpo -c -o libUtil_la-StrToUC.lo `test -f 'StrToUC.c' || echo '$(srcdir)/'`StrToUC.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUC.Tpo $(DEPDIR)/libUtil_la-StrToUC.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUC.c' object='libUtil_la-StrToUC.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUShort.lo `test -f 'StrToUShort.c' || echo '$(srcdir)/'`StrToUShort.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUC.lo `test -f 'StrToUC.c' || echo '$(srcdir)/'`StrToUC.c
 
-libUtil_la-StrToInt.lo: StrToInt.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToInt.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToInt.Tpo -c -o libUtil_la-StrToInt.lo `test -f 'StrToInt.c' || echo '$(srcdir)/'`StrToInt.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToInt.Tpo $(DEPDIR)/libUtil_la-StrToInt.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToInt.c' object='libUtil_la-StrToInt.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToS.lo: StrToS.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToS.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToS.Tpo -c -o libUtil_la-StrToS.lo `test -f 'StrToS.c' || echo '$(srcdir)/'`StrToS.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToS.Tpo $(DEPDIR)/libUtil_la-StrToS.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToS.c' object='libUtil_la-StrToS.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToInt.lo `test -f 'StrToInt.c' || echo '$(srcdir)/'`StrToInt.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToS.lo `test -f 'StrToS.c' || echo '$(srcdir)/'`StrToS.c
 
-libUtil_la-StrToUInt.lo: StrToUInt.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUInt.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUInt.Tpo -c -o libUtil_la-StrToUInt.lo `test -f 'StrToUInt.c' || echo '$(srcdir)/'`StrToUInt.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUInt.Tpo $(DEPDIR)/libUtil_la-StrToUInt.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUInt.c' object='libUtil_la-StrToUInt.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToUS.lo: StrToUS.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUS.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUS.Tpo -c -o libUtil_la-StrToUS.lo `test -f 'StrToUS.c' || echo '$(srcdir)/'`StrToUS.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUS.Tpo $(DEPDIR)/libUtil_la-StrToUS.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUS.c' object='libUtil_la-StrToUS.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUInt.lo `test -f 'StrToUInt.c' || echo '$(srcdir)/'`StrToUInt.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUS.lo `test -f 'StrToUS.c' || echo '$(srcdir)/'`StrToUS.c
 
-libUtil_la-StrToLong.lo: StrToLong.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToLong.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToLong.Tpo -c -o libUtil_la-StrToLong.lo `test -f 'StrToLong.c' || echo '$(srcdir)/'`StrToLong.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToLong.Tpo $(DEPDIR)/libUtil_la-StrToLong.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToLong.c' object='libUtil_la-StrToLong.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToI.lo: StrToI.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToI.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToI.Tpo -c -o libUtil_la-StrToI.lo `test -f 'StrToI.c' || echo '$(srcdir)/'`StrToI.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToI.Tpo $(DEPDIR)/libUtil_la-StrToI.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToI.c' object='libUtil_la-StrToI.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToLong.lo `test -f 'StrToLong.c' || echo '$(srcdir)/'`StrToLong.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToI.lo `test -f 'StrToI.c' || echo '$(srcdir)/'`StrToI.c
 
-libUtil_la-StrToULong.lo: StrToULong.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToULong.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToULong.Tpo -c -o libUtil_la-StrToULong.lo `test -f 'StrToULong.c' || echo '$(srcdir)/'`StrToULong.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToULong.Tpo $(DEPDIR)/libUtil_la-StrToULong.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToULong.c' object='libUtil_la-StrToULong.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToUI.lo: StrToUI.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUI.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUI.Tpo -c -o libUtil_la-StrToUI.lo `test -f 'StrToUI.c' || echo '$(srcdir)/'`StrToUI.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUI.Tpo $(DEPDIR)/libUtil_la-StrToUI.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUI.c' object='libUtil_la-StrToUI.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToULong.lo `test -f 'StrToULong.c' || echo '$(srcdir)/'`StrToULong.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUI.lo `test -f 'StrToUI.c' || echo '$(srcdir)/'`StrToUI.c
 
-libUtil_la-StrToLongLong.lo: StrToLongLong.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToLongLong.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToLongLong.Tpo -c -o libUtil_la-StrToLongLong.lo `test -f 'StrToLongLong.c' || echo '$(srcdir)/'`StrToLongLong.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToLongLong.Tpo $(DEPDIR)/libUtil_la-StrToLongLong.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToLongLong.c' object='libUtil_la-StrToLongLong.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToL.lo: StrToL.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToL.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToL.Tpo -c -o libUtil_la-StrToL.lo `test -f 'StrToL.c' || echo '$(srcdir)/'`StrToL.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToL.Tpo $(DEPDIR)/libUtil_la-StrToL.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToL.c' object='libUtil_la-StrToL.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToLongLong.lo `test -f 'StrToLongLong.c' || echo '$(srcdir)/'`StrToLongLong.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToL.lo `test -f 'StrToL.c' || echo '$(srcdir)/'`StrToL.c
 
-libUtil_la-StrToULongLong.lo: StrToULongLong.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToULongLong.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToULongLong.Tpo -c -o libUtil_la-StrToULongLong.lo `test -f 'StrToULongLong.c' || echo '$(srcdir)/'`StrToULongLong.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToULongLong.Tpo $(DEPDIR)/libUtil_la-StrToULongLong.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToULongLong.c' object='libUtil_la-StrToULongLong.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToUL.lo: StrToUL.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUL.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUL.Tpo -c -o libUtil_la-StrToUL.lo `test -f 'StrToUL.c' || echo '$(srcdir)/'`StrToUL.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUL.Tpo $(DEPDIR)/libUtil_la-StrToUL.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUL.c' object='libUtil_la-StrToUL.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToULongLong.lo `test -f 'StrToULongLong.c' || echo '$(srcdir)/'`StrToULongLong.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUL.lo `test -f 'StrToUL.c' || echo '$(srcdir)/'`StrToUL.c
 
-libUtil_la-StrToFloat.lo: StrToFloat.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToFloat.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToFloat.Tpo -c -o libUtil_la-StrToFloat.lo `test -f 'StrToFloat.c' || echo '$(srcdir)/'`StrToFloat.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToFloat.Tpo $(DEPDIR)/libUtil_la-StrToFloat.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToFloat.c' object='libUtil_la-StrToFloat.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToLL.lo: StrToLL.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToLL.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToLL.Tpo -c -o libUtil_la-StrToLL.lo `test -f 'StrToLL.c' || echo '$(srcdir)/'`StrToLL.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToLL.Tpo $(DEPDIR)/libUtil_la-StrToLL.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToLL.c' object='libUtil_la-StrToLL.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToFloat.lo `test -f 'StrToFloat.c' || echo '$(srcdir)/'`StrToFloat.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToLL.lo `test -f 'StrToLL.c' || echo '$(srcdir)/'`StrToLL.c
 
-libUtil_la-StrToDouble.lo: StrToDouble.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToDouble.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToDouble.Tpo -c -o libUtil_la-StrToDouble.lo `test -f 'StrToDouble.c' || echo '$(srcdir)/'`StrToDouble.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToDouble.Tpo $(DEPDIR)/libUtil_la-StrToDouble.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToDouble.c' object='libUtil_la-StrToDouble.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToULL.lo: StrToULL.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToULL.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToULL.Tpo -c -o libUtil_la-StrToULL.lo `test -f 'StrToULL.c' || echo '$(srcdir)/'`StrToULL.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToULL.Tpo $(DEPDIR)/libUtil_la-StrToULL.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToULL.c' object='libUtil_la-StrToULL.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToDouble.lo `test -f 'StrToDouble.c' || echo '$(srcdir)/'`StrToDouble.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToULL.lo `test -f 'StrToULL.c' || echo '$(srcdir)/'`StrToULL.c
 
-libUtil_la-StrToLongDouble.lo: StrToLongDouble.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToLongDouble.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToLongDouble.Tpo -c -o libUtil_la-StrToLongDouble.lo `test -f 'StrToLongDouble.c' || echo '$(srcdir)/'`StrToLongDouble.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToLongDouble.Tpo $(DEPDIR)/libUtil_la-StrToLongDouble.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToLongDouble.c' object='libUtil_la-StrToLongDouble.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToF.lo: StrToF.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToF.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToF.Tpo -c -o libUtil_la-StrToF.lo `test -f 'StrToF.c' || echo '$(srcdir)/'`StrToF.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToF.Tpo $(DEPDIR)/libUtil_la-StrToF.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToF.c' object='libUtil_la-StrToF.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToLongDouble.lo `test -f 'StrToLongDouble.c' || echo '$(srcdir)/'`StrToLongDouble.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToF.lo `test -f 'StrToF.c' || echo '$(srcdir)/'`StrToF.c
 
-libUtil_la-StrToInt8.lo: StrToInt8.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToInt8.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToInt8.Tpo -c -o libUtil_la-StrToInt8.lo `test -f 'StrToInt8.c' || echo '$(srcdir)/'`StrToInt8.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToInt8.Tpo $(DEPDIR)/libUtil_la-StrToInt8.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToInt8.c' object='libUtil_la-StrToInt8.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToD.lo: StrToD.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToD.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToD.Tpo -c -o libUtil_la-StrToD.lo `test -f 'StrToD.c' || echo '$(srcdir)/'`StrToD.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToD.Tpo $(DEPDIR)/libUtil_la-StrToD.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToD.c' object='libUtil_la-StrToD.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToInt8.lo `test -f 'StrToInt8.c' || echo '$(srcdir)/'`StrToInt8.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToD.lo `test -f 'StrToD.c' || echo '$(srcdir)/'`StrToD.c
 
-libUtil_la-StrToUInt8.lo: StrToUInt8.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUInt8.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUInt8.Tpo -c -o libUtil_la-StrToUInt8.lo `test -f 'StrToUInt8.c' || echo '$(srcdir)/'`StrToUInt8.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUInt8.Tpo $(DEPDIR)/libUtil_la-StrToUInt8.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUInt8.c' object='libUtil_la-StrToUInt8.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToLD.lo: StrToLD.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToLD.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToLD.Tpo -c -o libUtil_la-StrToLD.lo `test -f 'StrToLD.c' || echo '$(srcdir)/'`StrToLD.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToLD.Tpo $(DEPDIR)/libUtil_la-StrToLD.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToLD.c' object='libUtil_la-StrToLD.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUInt8.lo `test -f 'StrToUInt8.c' || echo '$(srcdir)/'`StrToUInt8.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToLD.lo `test -f 'StrToLD.c' || echo '$(srcdir)/'`StrToLD.c
 
-libUtil_la-StrToInt16.lo: StrToInt16.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToInt16.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToInt16.Tpo -c -o libUtil_la-StrToInt16.lo `test -f 'StrToInt16.c' || echo '$(srcdir)/'`StrToInt16.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToInt16.Tpo $(DEPDIR)/libUtil_la-StrToInt16.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToInt16.c' object='libUtil_la-StrToInt16.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToI8.lo: StrToI8.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToI8.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToI8.Tpo -c -o libUtil_la-StrToI8.lo `test -f 'StrToI8.c' || echo '$(srcdir)/'`StrToI8.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToI8.Tpo $(DEPDIR)/libUtil_la-StrToI8.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToI8.c' object='libUtil_la-StrToI8.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToInt16.lo `test -f 'StrToInt16.c' || echo '$(srcdir)/'`StrToInt16.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToI8.lo `test -f 'StrToI8.c' || echo '$(srcdir)/'`StrToI8.c
 
-libUtil_la-StrToUInt16.lo: StrToUInt16.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUInt16.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUInt16.Tpo -c -o libUtil_la-StrToUInt16.lo `test -f 'StrToUInt16.c' || echo '$(srcdir)/'`StrToUInt16.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUInt16.Tpo $(DEPDIR)/libUtil_la-StrToUInt16.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUInt16.c' object='libUtil_la-StrToUInt16.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToUI8.lo: StrToUI8.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUI8.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUI8.Tpo -c -o libUtil_la-StrToUI8.lo `test -f 'StrToUI8.c' || echo '$(srcdir)/'`StrToUI8.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUI8.Tpo $(DEPDIR)/libUtil_la-StrToUI8.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUI8.c' object='libUtil_la-StrToUI8.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUInt16.lo `test -f 'StrToUInt16.c' || echo '$(srcdir)/'`StrToUInt16.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUI8.lo `test -f 'StrToUI8.c' || echo '$(srcdir)/'`StrToUI8.c
 
-libUtil_la-StrToInt32.lo: StrToInt32.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToInt32.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToInt32.Tpo -c -o libUtil_la-StrToInt32.lo `test -f 'StrToInt32.c' || echo '$(srcdir)/'`StrToInt32.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToInt32.Tpo $(DEPDIR)/libUtil_la-StrToInt32.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToInt32.c' object='libUtil_la-StrToInt32.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToI16.lo: StrToI16.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToI16.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToI16.Tpo -c -o libUtil_la-StrToI16.lo `test -f 'StrToI16.c' || echo '$(srcdir)/'`StrToI16.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToI16.Tpo $(DEPDIR)/libUtil_la-StrToI16.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToI16.c' object='libUtil_la-StrToI16.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToInt32.lo `test -f 'StrToInt32.c' || echo '$(srcdir)/'`StrToInt32.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToI16.lo `test -f 'StrToI16.c' || echo '$(srcdir)/'`StrToI16.c
 
-libUtil_la-StrToUInt32.lo: StrToUInt32.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUInt32.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUInt32.Tpo -c -o libUtil_la-StrToUInt32.lo `test -f 'StrToUInt32.c' || echo '$(srcdir)/'`StrToUInt32.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUInt32.Tpo $(DEPDIR)/libUtil_la-StrToUInt32.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUInt32.c' object='libUtil_la-StrToUInt32.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToUI16.lo: StrToUI16.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUI16.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUI16.Tpo -c -o libUtil_la-StrToUI16.lo `test -f 'StrToUI16.c' || echo '$(srcdir)/'`StrToUI16.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUI16.Tpo $(DEPDIR)/libUtil_la-StrToUI16.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUI16.c' object='libUtil_la-StrToUI16.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUInt32.lo `test -f 'StrToUInt32.c' || echo '$(srcdir)/'`StrToUInt32.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUI16.lo `test -f 'StrToUI16.c' || echo '$(srcdir)/'`StrToUI16.c
 
-libUtil_la-StrToInt64.lo: StrToInt64.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToInt64.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToInt64.Tpo -c -o libUtil_la-StrToInt64.lo `test -f 'StrToInt64.c' || echo '$(srcdir)/'`StrToInt64.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToInt64.Tpo $(DEPDIR)/libUtil_la-StrToInt64.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToInt64.c' object='libUtil_la-StrToInt64.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToI32.lo: StrToI32.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToI32.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToI32.Tpo -c -o libUtil_la-StrToI32.lo `test -f 'StrToI32.c' || echo '$(srcdir)/'`StrToI32.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToI32.Tpo $(DEPDIR)/libUtil_la-StrToI32.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToI32.c' object='libUtil_la-StrToI32.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToInt64.lo `test -f 'StrToInt64.c' || echo '$(srcdir)/'`StrToInt64.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToI32.lo `test -f 'StrToI32.c' || echo '$(srcdir)/'`StrToI32.c
 
-libUtil_la-StrToUInt64.lo: StrToUInt64.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUInt64.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUInt64.Tpo -c -o libUtil_la-StrToUInt64.lo `test -f 'StrToUInt64.c' || echo '$(srcdir)/'`StrToUInt64.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUInt64.Tpo $(DEPDIR)/libUtil_la-StrToUInt64.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUInt64.c' object='libUtil_la-StrToUInt64.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToUI32.lo: StrToUI32.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUI32.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUI32.Tpo -c -o libUtil_la-StrToUI32.lo `test -f 'StrToUI32.c' || echo '$(srcdir)/'`StrToUI32.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUI32.Tpo $(DEPDIR)/libUtil_la-StrToUI32.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUI32.c' object='libUtil_la-StrToUI32.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUInt64.lo `test -f 'StrToUInt64.c' || echo '$(srcdir)/'`StrToUInt64.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUI32.lo `test -f 'StrToUI32.c' || echo '$(srcdir)/'`StrToUI32.c
 
-libUtil_la-StrToLInt8.lo: StrToLInt8.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToLInt8.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToLInt8.Tpo -c -o libUtil_la-StrToLInt8.lo `test -f 'StrToLInt8.c' || echo '$(srcdir)/'`StrToLInt8.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToLInt8.Tpo $(DEPDIR)/libUtil_la-StrToLInt8.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToLInt8.c' object='libUtil_la-StrToLInt8.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToI64.lo: StrToI64.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToI64.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToI64.Tpo -c -o libUtil_la-StrToI64.lo `test -f 'StrToI64.c' || echo '$(srcdir)/'`StrToI64.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToI64.Tpo $(DEPDIR)/libUtil_la-StrToI64.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToI64.c' object='libUtil_la-StrToI64.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToLInt8.lo `test -f 'StrToLInt8.c' || echo '$(srcdir)/'`StrToLInt8.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToI64.lo `test -f 'StrToI64.c' || echo '$(srcdir)/'`StrToI64.c
 
-libUtil_la-StrToULInt8.lo: StrToULInt8.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToULInt8.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToULInt8.Tpo -c -o libUtil_la-StrToULInt8.lo `test -f 'StrToULInt8.c' || echo '$(srcdir)/'`StrToULInt8.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToULInt8.Tpo $(DEPDIR)/libUtil_la-StrToULInt8.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToULInt8.c' object='libUtil_la-StrToULInt8.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToUI64.lo: StrToUI64.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUI64.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUI64.Tpo -c -o libUtil_la-StrToUI64.lo `test -f 'StrToUI64.c' || echo '$(srcdir)/'`StrToUI64.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUI64.Tpo $(DEPDIR)/libUtil_la-StrToUI64.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUI64.c' object='libUtil_la-StrToUI64.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToULInt8.lo `test -f 'StrToULInt8.c' || echo '$(srcdir)/'`StrToULInt8.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUI64.lo `test -f 'StrToUI64.c' || echo '$(srcdir)/'`StrToUI64.c
 
-libUtil_la-StrToLInt16.lo: StrToLInt16.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToLInt16.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToLInt16.Tpo -c -o libUtil_la-StrToLInt16.lo `test -f 'StrToLInt16.c' || echo '$(srcdir)/'`StrToLInt16.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToLInt16.Tpo $(DEPDIR)/libUtil_la-StrToLInt16.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToLInt16.c' object='libUtil_la-StrToLInt16.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToIMax.lo: StrToIMax.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToIMax.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToIMax.Tpo -c -o libUtil_la-StrToIMax.lo `test -f 'StrToIMax.c' || echo '$(srcdir)/'`StrToIMax.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToIMax.Tpo $(DEPDIR)/libUtil_la-StrToIMax.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToIMax.c' object='libUtil_la-StrToIMax.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToLInt16.lo `test -f 'StrToLInt16.c' || echo '$(srcdir)/'`StrToLInt16.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToIMax.lo `test -f 'StrToIMax.c' || echo '$(srcdir)/'`StrToIMax.c
 
-libUtil_la-StrToULInt16.lo: StrToULInt16.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToULInt16.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToULInt16.Tpo -c -o libUtil_la-StrToULInt16.lo `test -f 'StrToULInt16.c' || echo '$(srcdir)/'`StrToULInt16.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToULInt16.Tpo $(DEPDIR)/libUtil_la-StrToULInt16.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToULInt16.c' object='libUtil_la-StrToULInt16.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToUMax.lo: StrToUMax.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUMax.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUMax.Tpo -c -o libUtil_la-StrToUMax.lo `test -f 'StrToUMax.c' || echo '$(srcdir)/'`StrToUMax.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUMax.Tpo $(DEPDIR)/libUtil_la-StrToUMax.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUMax.c' object='libUtil_la-StrToUMax.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToULInt16.lo `test -f 'StrToULInt16.c' || echo '$(srcdir)/'`StrToULInt16.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUMax.lo `test -f 'StrToUMax.c' || echo '$(srcdir)/'`StrToUMax.c
 
-libUtil_la-StrToLInt32.lo: StrToLInt32.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToLInt32.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToLInt32.Tpo -c -o libUtil_la-StrToLInt32.lo `test -f 'StrToLInt32.c' || echo '$(srcdir)/'`StrToLInt32.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToLInt32.Tpo $(DEPDIR)/libUtil_la-StrToLInt32.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToLInt32.c' object='libUtil_la-StrToLInt32.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToIL8.lo: StrToIL8.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToIL8.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToIL8.Tpo -c -o libUtil_la-StrToIL8.lo `test -f 'StrToIL8.c' || echo '$(srcdir)/'`StrToIL8.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToIL8.Tpo $(DEPDIR)/libUtil_la-StrToIL8.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToIL8.c' object='libUtil_la-StrToIL8.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToLInt32.lo `test -f 'StrToLInt32.c' || echo '$(srcdir)/'`StrToLInt32.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToIL8.lo `test -f 'StrToIL8.c' || echo '$(srcdir)/'`StrToIL8.c
 
-libUtil_la-StrToULInt32.lo: StrToULInt32.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToULInt32.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToULInt32.Tpo -c -o libUtil_la-StrToULInt32.lo `test -f 'StrToULInt32.c' || echo '$(srcdir)/'`StrToULInt32.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToULInt32.Tpo $(DEPDIR)/libUtil_la-StrToULInt32.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToULInt32.c' object='libUtil_la-StrToULInt32.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToUIL8.lo: StrToUIL8.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUIL8.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUIL8.Tpo -c -o libUtil_la-StrToUIL8.lo `test -f 'StrToUIL8.c' || echo '$(srcdir)/'`StrToUIL8.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUIL8.Tpo $(DEPDIR)/libUtil_la-StrToUIL8.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUIL8.c' object='libUtil_la-StrToUIL8.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToULInt32.lo `test -f 'StrToULInt32.c' || echo '$(srcdir)/'`StrToULInt32.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUIL8.lo `test -f 'StrToUIL8.c' || echo '$(srcdir)/'`StrToUIL8.c
 
-libUtil_la-StrToLInt64.lo: StrToLInt64.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToLInt64.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToLInt64.Tpo -c -o libUtil_la-StrToLInt64.lo `test -f 'StrToLInt64.c' || echo '$(srcdir)/'`StrToLInt64.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToLInt64.Tpo $(DEPDIR)/libUtil_la-StrToLInt64.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToLInt64.c' object='libUtil_la-StrToLInt64.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToIL16.lo: StrToIL16.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToIL16.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToIL16.Tpo -c -o libUtil_la-StrToIL16.lo `test -f 'StrToIL16.c' || echo '$(srcdir)/'`StrToIL16.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToIL16.Tpo $(DEPDIR)/libUtil_la-StrToIL16.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToIL16.c' object='libUtil_la-StrToIL16.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToLInt64.lo `test -f 'StrToLInt64.c' || echo '$(srcdir)/'`StrToLInt64.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToIL16.lo `test -f 'StrToIL16.c' || echo '$(srcdir)/'`StrToIL16.c
 
-libUtil_la-StrToULInt64.lo: StrToULInt64.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToULInt64.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToULInt64.Tpo -c -o libUtil_la-StrToULInt64.lo `test -f 'StrToULInt64.c' || echo '$(srcdir)/'`StrToULInt64.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToULInt64.Tpo $(DEPDIR)/libUtil_la-StrToULInt64.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToULInt64.c' object='libUtil_la-StrToULInt64.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToUIL16.lo: StrToUIL16.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUIL16.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUIL16.Tpo -c -o libUtil_la-StrToUIL16.lo `test -f 'StrToUIL16.c' || echo '$(srcdir)/'`StrToUIL16.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUIL16.Tpo $(DEPDIR)/libUtil_la-StrToUIL16.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUIL16.c' object='libUtil_la-StrToUIL16.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToULInt64.lo `test -f 'StrToULInt64.c' || echo '$(srcdir)/'`StrToULInt64.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUIL16.lo `test -f 'StrToUIL16.c' || echo '$(srcdir)/'`StrToUIL16.c
 
-libUtil_la-StrToFInt8.lo: StrToFInt8.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToFInt8.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToFInt8.Tpo -c -o libUtil_la-StrToFInt8.lo `test -f 'StrToFInt8.c' || echo '$(srcdir)/'`StrToFInt8.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToFInt8.Tpo $(DEPDIR)/libUtil_la-StrToFInt8.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToFInt8.c' object='libUtil_la-StrToFInt8.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToIL32.lo: StrToIL32.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToIL32.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToIL32.Tpo -c -o libUtil_la-StrToIL32.lo `test -f 'StrToIL32.c' || echo '$(srcdir)/'`StrToIL32.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToIL32.Tpo $(DEPDIR)/libUtil_la-StrToIL32.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToIL32.c' object='libUtil_la-StrToIL32.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToFInt8.lo `test -f 'StrToFInt8.c' || echo '$(srcdir)/'`StrToFInt8.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToIL32.lo `test -f 'StrToIL32.c' || echo '$(srcdir)/'`StrToIL32.c
 
-libUtil_la-StrToUFInt8.lo: StrToUFInt8.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUFInt8.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUFInt8.Tpo -c -o libUtil_la-StrToUFInt8.lo `test -f 'StrToUFInt8.c' || echo '$(srcdir)/'`StrToUFInt8.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUFInt8.Tpo $(DEPDIR)/libUtil_la-StrToUFInt8.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUFInt8.c' object='libUtil_la-StrToUFInt8.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToUIL32.lo: StrToUIL32.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUIL32.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUIL32.Tpo -c -o libUtil_la-StrToUIL32.lo `test -f 'StrToUIL32.c' || echo '$(srcdir)/'`StrToUIL32.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUIL32.Tpo $(DEPDIR)/libUtil_la-StrToUIL32.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUIL32.c' object='libUtil_la-StrToUIL32.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUFInt8.lo `test -f 'StrToUFInt8.c' || echo '$(srcdir)/'`StrToUFInt8.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUIL32.lo `test -f 'StrToUIL32.c' || echo '$(srcdir)/'`StrToUIL32.c
 
-libUtil_la-StrToFInt16.lo: StrToFInt16.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToFInt16.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToFInt16.Tpo -c -o libUtil_la-StrToFInt16.lo `test -f 'StrToFInt16.c' || echo '$(srcdir)/'`StrToFInt16.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToFInt16.Tpo $(DEPDIR)/libUtil_la-StrToFInt16.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToFInt16.c' object='libUtil_la-StrToFInt16.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToIL64.lo: StrToIL64.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToIL64.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToIL64.Tpo -c -o libUtil_la-StrToIL64.lo `test -f 'StrToIL64.c' || echo '$(srcdir)/'`StrToIL64.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToIL64.Tpo $(DEPDIR)/libUtil_la-StrToIL64.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToIL64.c' object='libUtil_la-StrToIL64.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToFInt16.lo `test -f 'StrToFInt16.c' || echo '$(srcdir)/'`StrToFInt16.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToIL64.lo `test -f 'StrToIL64.c' || echo '$(srcdir)/'`StrToIL64.c
 
-libUtil_la-StrToUFInt16.lo: StrToUFInt16.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUFInt16.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUFInt16.Tpo -c -o libUtil_la-StrToUFInt16.lo `test -f 'StrToUFInt16.c' || echo '$(srcdir)/'`StrToUFInt16.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUFInt16.Tpo $(DEPDIR)/libUtil_la-StrToUFInt16.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUFInt16.c' object='libUtil_la-StrToUFInt16.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToUIL64.lo: StrToUIL64.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUIL64.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUIL64.Tpo -c -o libUtil_la-StrToUIL64.lo `test -f 'StrToUIL64.c' || echo '$(srcdir)/'`StrToUIL64.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUIL64.Tpo $(DEPDIR)/libUtil_la-StrToUIL64.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUIL64.c' object='libUtil_la-StrToUIL64.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUFInt16.lo `test -f 'StrToUFInt16.c' || echo '$(srcdir)/'`StrToUFInt16.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUIL64.lo `test -f 'StrToUIL64.c' || echo '$(srcdir)/'`StrToUIL64.c
 
-libUtil_la-StrToFInt32.lo: StrToFInt32.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToFInt32.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToFInt32.Tpo -c -o libUtil_la-StrToFInt32.lo `test -f 'StrToFInt32.c' || echo '$(srcdir)/'`StrToFInt32.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToFInt32.Tpo $(DEPDIR)/libUtil_la-StrToFInt32.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToFInt32.c' object='libUtil_la-StrToFInt32.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToIF8.lo: StrToIF8.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToIF8.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToIF8.Tpo -c -o libUtil_la-StrToIF8.lo `test -f 'StrToIF8.c' || echo '$(srcdir)/'`StrToIF8.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToIF8.Tpo $(DEPDIR)/libUtil_la-StrToIF8.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToIF8.c' object='libUtil_la-StrToIF8.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToFInt32.lo `test -f 'StrToFInt32.c' || echo '$(srcdir)/'`StrToFInt32.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToIF8.lo `test -f 'StrToIF8.c' || echo '$(srcdir)/'`StrToIF8.c
 
-libUtil_la-StrToUFInt32.lo: StrToUFInt32.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUFInt32.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUFInt32.Tpo -c -o libUtil_la-StrToUFInt32.lo `test -f 'StrToUFInt32.c' || echo '$(srcdir)/'`StrToUFInt32.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUFInt32.Tpo $(DEPDIR)/libUtil_la-StrToUFInt32.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUFInt32.c' object='libUtil_la-StrToUFInt32.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToUIF8.lo: StrToUIF8.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUIF8.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUIF8.Tpo -c -o libUtil_la-StrToUIF8.lo `test -f 'StrToUIF8.c' || echo '$(srcdir)/'`StrToUIF8.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUIF8.Tpo $(DEPDIR)/libUtil_la-StrToUIF8.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUIF8.c' object='libUtil_la-StrToUIF8.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUFInt32.lo `test -f 'StrToUFInt32.c' || echo '$(srcdir)/'`StrToUFInt32.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUIF8.lo `test -f 'StrToUIF8.c' || echo '$(srcdir)/'`StrToUIF8.c
 
-libUtil_la-StrToFInt64.lo: StrToFInt64.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToFInt64.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToFInt64.Tpo -c -o libUtil_la-StrToFInt64.lo `test -f 'StrToFInt64.c' || echo '$(srcdir)/'`StrToFInt64.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToFInt64.Tpo $(DEPDIR)/libUtil_la-StrToFInt64.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToFInt64.c' object='libUtil_la-StrToFInt64.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToIF16.lo: StrToIF16.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToIF16.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToIF16.Tpo -c -o libUtil_la-StrToIF16.lo `test -f 'StrToIF16.c' || echo '$(srcdir)/'`StrToIF16.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToIF16.Tpo $(DEPDIR)/libUtil_la-StrToIF16.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToIF16.c' object='libUtil_la-StrToIF16.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToFInt64.lo `test -f 'StrToFInt64.c' || echo '$(srcdir)/'`StrToFInt64.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToIF16.lo `test -f 'StrToIF16.c' || echo '$(srcdir)/'`StrToIF16.c
 
-libUtil_la-StrToUFInt64.lo: StrToUFInt64.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUFInt64.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUFInt64.Tpo -c -o libUtil_la-StrToUFInt64.lo `test -f 'StrToUFInt64.c' || echo '$(srcdir)/'`StrToUFInt64.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUFInt64.Tpo $(DEPDIR)/libUtil_la-StrToUFInt64.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUFInt64.c' object='libUtil_la-StrToUFInt64.lo' libtool=yes @AMDEPBACKSLASH@
+libUtil_la-StrToUIF16.lo: StrToUIF16.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUIF16.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUIF16.Tpo -c -o libUtil_la-StrToUIF16.lo `test -f 'StrToUIF16.c' || echo '$(srcdir)/'`StrToUIF16.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUIF16.Tpo $(DEPDIR)/libUtil_la-StrToUIF16.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUIF16.c' object='libUtil_la-StrToUIF16.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUFInt64.lo `test -f 'StrToUFInt64.c' || echo '$(srcdir)/'`StrToUFInt64.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUIF16.lo `test -f 'StrToUIF16.c' || echo '$(srcdir)/'`StrToUIF16.c
+
+libUtil_la-StrToIF32.lo: StrToIF32.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToIF32.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToIF32.Tpo -c -o libUtil_la-StrToIF32.lo `test -f 'StrToIF32.c' || echo '$(srcdir)/'`StrToIF32.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToIF32.Tpo $(DEPDIR)/libUtil_la-StrToIF32.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToIF32.c' object='libUtil_la-StrToIF32.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToIF32.lo `test -f 'StrToIF32.c' || echo '$(srcdir)/'`StrToIF32.c
+
+libUtil_la-StrToUIF32.lo: StrToUIF32.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUIF32.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUIF32.Tpo -c -o libUtil_la-StrToUIF32.lo `test -f 'StrToUIF32.c' || echo '$(srcdir)/'`StrToUIF32.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUIF32.Tpo $(DEPDIR)/libUtil_la-StrToUIF32.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUIF32.c' object='libUtil_la-StrToUIF32.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUIF32.lo `test -f 'StrToUIF32.c' || echo '$(srcdir)/'`StrToUIF32.c
+
+libUtil_la-StrToIF64.lo: StrToIF64.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToIF64.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToIF64.Tpo -c -o libUtil_la-StrToIF64.lo `test -f 'StrToIF64.c' || echo '$(srcdir)/'`StrToIF64.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToIF64.Tpo $(DEPDIR)/libUtil_la-StrToIF64.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToIF64.c' object='libUtil_la-StrToIF64.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToIF64.lo `test -f 'StrToIF64.c' || echo '$(srcdir)/'`StrToIF64.c
+
+libUtil_la-StrToUIF64.lo: StrToUIF64.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-StrToUIF64.lo -MD -MP -MF $(DEPDIR)/libUtil_la-StrToUIF64.Tpo -c -o libUtil_la-StrToUIF64.lo `test -f 'StrToUIF64.c' || echo '$(srcdir)/'`StrToUIF64.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-StrToUIF64.Tpo $(DEPDIR)/libUtil_la-StrToUIF64.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='StrToUIF64.c' object='libUtil_la-StrToUIF64.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-StrToUIF64.lo `test -f 'StrToUIF64.c' || echo '$(srcdir)/'`StrToUIF64.c
 
 libUtil_la-String.lo: String.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-String.lo -MD -MP -MF $(DEPDIR)/libUtil_la-String.Tpo -c -o libUtil_la-String.lo `test -f 'String.c' || echo '$(srcdir)/'`String.c
@@ -1121,6 +1138,13 @@ libUtil_la-String.lo: String.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='String.c' object='libUtil_la-String.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-String.lo `test -f 'String.c' || echo '$(srcdir)/'`String.c
+
+libUtil_la-Errors.lo: Errors.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -MT libUtil_la-Errors.lo -MD -MP -MF $(DEPDIR)/libUtil_la-Errors.Tpo -c -o libUtil_la-Errors.lo `test -f 'Errors.c' || echo '$(srcdir)/'`Errors.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libUtil_la-Errors.Tpo $(DEPDIR)/libUtil_la-Errors.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Errors.c' object='libUtil_la-Errors.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libUtil_la_CFLAGS) $(CFLAGS) -c -o libUtil_la-Errors.lo `test -f 'Errors.c' || echo '$(srcdir)/'`Errors.c
 
 mostlyclean-libtool:
 	-rm -f *.lo
