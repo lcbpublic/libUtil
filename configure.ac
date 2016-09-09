@@ -6,13 +6,13 @@ AC_PREREQ(2.67)
 # Library version.
 m4_define([libUtil_major_version],      [0])
 m4_define([libUtil_minor_version],      [0])
-m4_define([libUtil_micro_version],      [3])
+m4_define([libUtil_micro_version],      [4])
 m4_define([libUtil_version],
           [libUtil_major_version.libUtil_minor_version.libUtil_micro_version])
 
 m4_define([libUtil_interface],          [0])
 m4_define([libUtil_interface_age],      [0])
-m4_define([libUtil_interface_revision], [3])
+m4_define([libUtil_interface_revision], [4])
 #m4_define([libUtil_binary_age],    [0])
 
 # libtool version related macros.  See

@@ -5,7 +5,7 @@ project(libUtil)
 # The version info.
 set(libUtil_VERSION_MAJOR 0)
 set(libUtil_VERSION_MINOR 0)
-set(libUtil_VERSION_PATCH 3)
+set(libUtil_VERSION_PATCH 4)
 configure_file(
   "${PROJECT_SOURCE_DIR}/Util/config.h.in"
   "${PROJECT_SOURCE_DIR}/Util/config.h"
